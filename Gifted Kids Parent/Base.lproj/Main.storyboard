@@ -114,6 +114,9 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="30天" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vN-jl-kWa">
                                 <rect key="frame" x="64" y="44" width="256" height="36"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="256" id="6sE-Au-4hj"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -319,6 +322,8 @@
                     <connections>
                         <outlet property="coinCountLabel" destination="nHJ-gV-2J0" id="d45-YI-nlx"/>
                         <outlet property="consecutiveLabel" destination="SNu-Sl-euj" id="cvX-U2-WGX"/>
+                        <outlet property="emptyWidthConstraint" destination="6sE-Au-4hj" id="Dct-33-eUm"/>
+                        <outlet property="filledWidthConstraint" destination="cz7-x4-eK7" id="Ohc-vs-bks"/>
                         <outlet property="newsFeedTableView" destination="sPv-kK-FEi" id="21K-1B-w6I"/>
                         <outlet property="progressBarEmpty" destination="2vN-jl-kWa" id="XeZ-eQ-T3t"/>
                         <outlet property="progressBarFilled" destination="hji-ZP-IVd" id="wm1-XH-OQk"/>
