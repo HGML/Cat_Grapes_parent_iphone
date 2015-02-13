@@ -37,6 +37,9 @@
 		315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */; };
 		315EC7061A8B4091003D466D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC7051A8B4091003D466D /* HomeViewController.m */; };
 		319BF1CC1A8DC415007BAF77 /* ImageTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1CB1A8DC415007BAF77 /* ImageTextCell.m */; };
+		319BF1E61A8DE773007BAF77 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1E51A8DE773007BAF77 /* SWRevealViewController.m */; };
+		319BF1E91A8DE7D6007BAF77 /* Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 319BF1E71A8DE7D6007BAF77 /* Menu.png */; };
+		319BF1EA1A8DE7D6007BAF77 /* Menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319BF1E81A8DE7D6007BAF77 /* Menu@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,10 @@
 		315EC7051A8B4091003D466D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		319BF1CA1A8DC415007BAF77 /* ImageTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageTextCell.h; sourceTree = "<group>"; };
 		319BF1CB1A8DC415007BAF77 /* ImageTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageTextCell.m; sourceTree = "<group>"; };
+		319BF1E41A8DE773007BAF77 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		319BF1E51A8DE773007BAF77 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		319BF1E71A8DE7D6007BAF77 /* Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu.png; sourceTree = "<group>"; };
+		319BF1E81A8DE7D6007BAF77 /* Menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +137,7 @@
 			children = (
 				315EC6BD1A8B3F96003D466D /* Main.storyboard */,
 				315EC6B71A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld */,
+				319BF1E31A8DE773007BAF77 /* SWRevealViewController */,
 				315EC6B41A8B3F96003D466D /* AppDelegate.h */,
 				315EC6B51A8B3F96003D466D /* AppDelegate.m */,
 				315EC7041A8B4091003D466D /* HomeViewController.h */,
@@ -184,6 +192,8 @@
 				315EC6E21A8B3FCB003D466D /* Contract_59244.png */,
 				315EC6E31A8B3FCB003D466D /* Home_56766.png */,
 				315EC6E41A8B3FCB003D466D /* List_11796.png */,
+				319BF1E71A8DE7D6007BAF77 /* Menu.png */,
+				319BF1E81A8DE7D6007BAF77 /* Menu@2x.png */,
 				315EC6E51A8B3FCB003D466D /* Report_20789.png */,
 				315EC6E61A8B3FCB003D466D /* Sentence_59929.png */,
 				315EC6E71A8B3FCB003D466D /* Sentence_small_59929.png */,
@@ -196,6 +206,15 @@
 				315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		319BF1E31A8DE773007BAF77 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				319BF1E41A8DE773007BAF77 /* SWRevealViewController.h */,
+				319BF1E51A8DE773007BAF77 /* SWRevealViewController.m */,
+			);
+			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +299,7 @@
 			files = (
 				315EC6FC1A8B3FCB003D466D /* Sentence_small_59929.png in Resources */,
 				315EC6FF1A8B3FCB003D466D /* Thumb_Up_76060_1.png in Resources */,
+				319BF1E91A8DE7D6007BAF77 /* Menu.png in Resources */,
 				315EC6F41A8B3FCB003D466D /* Close_40378.png in Resources */,
 				315EC7001A8B3FCB003D466D /* Two lines 2.png in Resources */,
 				315EC6F21A8B3FCB003D466D /* Award_50955.png in Resources */,
@@ -294,6 +314,7 @@
 				315EC6F71A8B3FCB003D466D /* Contract_59244.png in Resources */,
 				315EC6F91A8B3FCB003D466D /* List_11796.png in Resources */,
 				315EC6F01A8B3FCB003D466D /* Alarm_11222.png in Resources */,
+				319BF1EA1A8DE7D6007BAF77 /* Menu@2x.png in Resources */,
 				315EC6FE1A8B3FCB003D466D /* Thumb_Up_76060.png in Resources */,
 				315EC6FB1A8B3FCB003D466D /* Sentence_59929.png in Resources */,
 				315EC6FD1A8B3FCB003D466D /* Setting_45236.png in Resources */,
@@ -324,6 +345,7 @@
 				315EC6B31A8B3F96003D466D /* main.m in Sources */,
 				319BF1CC1A8DC415007BAF77 /* ImageTextCell.m in Sources */,
 				315EC7061A8B4091003D466D /* HomeViewController.m in Sources */,
+				319BF1E61A8DE773007BAF77 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

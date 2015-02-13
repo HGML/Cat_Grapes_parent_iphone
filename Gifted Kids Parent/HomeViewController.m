@@ -7,10 +7,14 @@
 //
 
 #import "HomeViewController.h"
+
+#import "SWRevealViewController.h"
 #import "ImageTextCell.h"
 
 
 @interface HomeViewController () <UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
 @property (weak, nonatomic) IBOutlet UILabel *progressBarFilled;
 
@@ -37,6 +41,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set up SWRevealController
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if (revealViewController) {
+        [self.sidebarButton setTarget:self.revealViewController];
+        [self.sidebarButton setAction:@selector(revealToggle:)];
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
     
     // Update progress bar
     [self updateProgressBar];
