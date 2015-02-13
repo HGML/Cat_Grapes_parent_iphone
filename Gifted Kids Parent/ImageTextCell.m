@@ -6,10 +6,10 @@
 //  Copyright (c) 2015年 Yi Li. All rights reserved.
 //
 
-#import "NewsFeedCell.h"
+#import "ImageTextCell.h"
 
 
-@implementation NewsFeedCell
+@implementation ImageTextCell
 
 - (void)awakeFromNib {
     // Initialization code

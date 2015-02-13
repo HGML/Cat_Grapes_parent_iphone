@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NewsFeedCell : UITableViewCell
+@interface ImageTextCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *image;
 

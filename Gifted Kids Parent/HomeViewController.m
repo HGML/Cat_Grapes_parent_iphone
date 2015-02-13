@@ -7,7 +7,7 @@
 //
 
 #import "HomeViewController.h"
-#import "NewsFeedCell.h"
+#import "ImageTextCell.h"
 
 
 @interface HomeViewController () <UITableViewDataSource>
@@ -115,7 +115,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NewsFeedCell *cell = (NewsFeedCell*)[tableView dequeueReusableCellWithIdentifier:@"newsFeedCell" forIndexPath:indexPath];
+    ImageTextCell *cell = (ImageTextCell*)[tableView dequeueReusableCellWithIdentifier:@"newsFeedCell" forIndexPath:indexPath];
     
     if (indexPath.row % 3 == 0) {
         [cell.image setImage:[UIImage imageNamed:@"Alarm_small_11222.png"]];
