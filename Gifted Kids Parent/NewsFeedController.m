@@ -7,6 +7,8 @@
 //
 
 #import "NewsFeedController.h"
+#import "ImageTextCell.h"
+
 #import "SWRevealViewController.h"
 
 
@@ -37,67 +39,44 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsFeedCell" forIndexPath:indexPath];
+    ImageTextCell *cell = (ImageTextCell*)[tableView dequeueReusableCellWithIdentifier:@"newsFeedCell" forIndexPath:indexPath];
     
-    // Configure the cell...
+    if (indexPath.row % 3 == 0) {
+        [cell.image setImage:[UIImage imageNamed:@"Alarm_small_11222.png"]];
+        [cell.label setText:@"小明今天主动准时复习了！"];
+    }
+    else if (indexPath.row % 3 == 1) {
+        [cell.image setImage:[UIImage imageNamed:@"Sentence_small_59929.png"]];
+        [cell.label setText:@"昨天说对了一句中考句子！"];
+    }
+    else {
+        [cell.image setImage:[UIImage imageNamed:@"Coin_small_99355.png"]];
+        [cell.label setText:@"昨天挣了86个金币！"];
+    }
     
     return cell;
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 /*
 #pragma mark - Navigation

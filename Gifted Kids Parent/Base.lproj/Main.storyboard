@@ -177,7 +177,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="0.90853851009999997" green="0.90853851009999997" blue="0.90853851009999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsFeedCell" id="lO5-zd-uz8" customClass="ImageTextCell">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsFeedCell" id="lO5-zd-uz8" customClass="ImageTextCell">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lO5-zd-uz8" id="qNP-6z-IKS">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -308,7 +308,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pI1-6Y-Ssk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="747"/>
+            <point key="canvasLocation" x="561" y="604"/>
         </scene>
         <!--News Feed Controller-->
         <scene sceneID="fWz-Dp-oED">
@@ -332,11 +332,47 @@
                             </items>
                         </navigationBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsFeedCell" id="hi3-jX-2jO">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsFeedCell" id="y92-rk-Xtr" customClass="ImageTextCell">
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hi3-jX-2jO" id="5kh-4s-MYr">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y92-rk-Xtr" id="yUy-hU-7y1">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Alarm_small_11222.png" translatesAutoresizingMaskIntoConstraints="NO" id="zFS-5T-X9t">
+                                            <rect key="frame" x="0.0" y="2" width="43" height="43"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="43" id="Ize-QL-frb"/>
+                                                <constraint firstAttribute="height" constant="43" id="zPX-W2-e3g"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="小明今天主动准时复习了！" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YS-uJ-yYj">
+                                            <rect key="frame" x="51" y="8" width="237" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="fMw-Rn-ydq"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="3YS-uJ-yYj" secondAttribute="bottom" constant="-1" id="9Pc-hm-O2T"/>
+                                        <constraint firstItem="zFS-5T-X9t" firstAttribute="leading" secondItem="yUy-hU-7y1" secondAttribute="leadingMargin" constant="-8" id="AFO-o9-DlN"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zFS-5T-X9t" secondAttribute="bottom" constant="-10" id="BU0-DD-f6v"/>
+                                        <constraint firstItem="3YS-uJ-yYj" firstAttribute="leading" secondItem="zFS-5T-X9t" secondAttribute="trailing" constant="8" symbolic="YES" id="DX9-WW-FLp"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="3YS-uJ-yYj" secondAttribute="trailing" constant="-8" id="Di0-Gv-YmU"/>
+                                        <constraint firstAttribute="trailing" secondItem="3YS-uJ-yYj" secondAttribute="trailing" id="bVe-nR-ZIs"/>
+                                        <constraint firstItem="zFS-5T-X9t" firstAttribute="top" secondItem="yUy-hU-7y1" secondAttribute="topMargin" constant="-6" id="cSO-9o-88f"/>
+                                        <constraint firstItem="3YS-uJ-yYj" firstAttribute="top" secondItem="yUy-hU-7y1" secondAttribute="topMargin" id="dGN-JI-KEb"/>
+                                        <constraint firstItem="zFS-5T-X9t" firstAttribute="top" secondItem="yUy-hU-7y1" secondAttribute="topMargin" constant="-6" id="hAr-eN-2Ek"/>
+                                        <constraint firstItem="zFS-5T-X9t" firstAttribute="leading" secondItem="yUy-hU-7y1" secondAttribute="leading" id="hCr-AF-23o"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="zFS-5T-X9t" secondAttribute="bottom" constant="-10" id="iHj-ym-aXU"/>
+                                        <constraint firstItem="3YS-uJ-yYj" firstAttribute="leading" secondItem="zFS-5T-X9t" secondAttribute="trailing" constant="8" id="uMy-3q-ua3"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="image" destination="zFS-5T-X9t" id="oDZ-a3-NIf"/>
+                                    <outlet property="label" destination="3YS-uJ-yYj" id="BD8-Cj-mE8"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -350,7 +386,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bK0-xR-fhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1122" y="375"/>
+            <point key="canvasLocation" x="951" y="604"/>
         </scene>
         <!--Sidebar View Controller-->
         <scene sceneID="koL-Z7-p4Z">
@@ -488,7 +524,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rHA-OW-1pg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599" y="46"/>
+            <point key="canvasLocation" x="869" y="-81"/>
         </scene>
     </scenes>
     <resources>
