@@ -381,7 +381,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Home_56766.png" translatesAutoresizingMaskIntoConstraints="NO" id="tv0-Uq-ecj">
-                                                    <rect key="frame" x="8" y="1" width="43" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="43" height="43"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -404,7 +404,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Achievement_55588.png" translatesAutoresizingMaskIntoConstraints="NO" id="5Jk-Na-WLQ">
-                                                    <rect key="frame" x="8" y="1" width="43" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="43" height="43"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -427,7 +427,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Report_20789.png" translatesAutoresizingMaskIntoConstraints="NO" id="oOf-ah-H6u">
-                                                    <rect key="frame" x="8" y="1" width="43" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="43" height="43"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -449,7 +449,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Contract_59244.png" translatesAutoresizingMaskIntoConstraints="NO" id="inv-sq-UGf">
-                                                    <rect key="frame" x="8" y="1" width="43" height="43"/>
+                                                    <rect key="frame" x="8" y="0.0" width="43" height="43"/>
                                                 </imageView>
                                             </subviews>
                                         </tableViewCellContentView>
