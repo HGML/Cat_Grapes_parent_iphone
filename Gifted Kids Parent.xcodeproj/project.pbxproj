@@ -40,6 +40,8 @@
 		319BF1E61A8DE773007BAF77 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1E51A8DE773007BAF77 /* SWRevealViewController.m */; };
 		319BF1E91A8DE7D6007BAF77 /* Menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 319BF1E71A8DE7D6007BAF77 /* Menu.png */; };
 		319BF1EA1A8DE7D6007BAF77 /* Menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319BF1E81A8DE7D6007BAF77 /* Menu@2x.png */; };
+		319BF1ED1A8DEC6E007BAF77 /* NewsFeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1EC1A8DEC6E007BAF77 /* NewsFeedController.m */; };
+		319BF1F01A8DEF81007BAF77 /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1EF1A8DEF81007BAF77 /* SidebarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,10 @@
 		319BF1E51A8DE773007BAF77 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		319BF1E71A8DE7D6007BAF77 /* Menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Menu.png; sourceTree = "<group>"; };
 		319BF1E81A8DE7D6007BAF77 /* Menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Menu@2x.png"; sourceTree = "<group>"; };
+		319BF1EB1A8DEC6E007BAF77 /* NewsFeedController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsFeedController.h; sourceTree = "<group>"; };
+		319BF1EC1A8DEC6E007BAF77 /* NewsFeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedController.m; sourceTree = "<group>"; };
+		319BF1EE1A8DEF81007BAF77 /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarViewController.h; sourceTree = "<group>"; };
+		319BF1EF1A8DEF81007BAF77 /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,10 +146,14 @@
 				319BF1E31A8DE773007BAF77 /* SWRevealViewController */,
 				315EC6B41A8B3F96003D466D /* AppDelegate.h */,
 				315EC6B51A8B3F96003D466D /* AppDelegate.m */,
-				315EC7041A8B4091003D466D /* HomeViewController.h */,
-				315EC7051A8B4091003D466D /* HomeViewController.m */,
 				319BF1CA1A8DC415007BAF77 /* ImageTextCell.h */,
 				319BF1CB1A8DC415007BAF77 /* ImageTextCell.m */,
+				319BF1EE1A8DEF81007BAF77 /* SidebarViewController.h */,
+				319BF1EF1A8DEF81007BAF77 /* SidebarViewController.m */,
+				315EC7041A8B4091003D466D /* HomeViewController.h */,
+				315EC7051A8B4091003D466D /* HomeViewController.m */,
+				319BF1EB1A8DEC6E007BAF77 /* NewsFeedController.h */,
+				319BF1EC1A8DEC6E007BAF77 /* NewsFeedController.m */,
 				315EC6C01A8B3F96003D466D /* Images.xcassets */,
 				315EC6C21A8B3F96003D466D /* LaunchScreen.xib */,
 				315EC6D91A8B3FCB003D466D /* Resources */,
@@ -227,6 +237,7 @@
 				315EC6A91A8B3F95003D466D /* Sources */,
 				315EC6AA1A8B3F95003D466D /* Frameworks */,
 				315EC6AB1A8B3F95003D466D /* Resources */,
+				319BF1F11A8DF59F007BAF77 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -335,6 +346,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		319BF1F11A8DF59F007BAF77 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		315EC6A91A8B3F95003D466D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -343,8 +370,10 @@
 				315EC6B91A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld in Sources */,
 				315EC6B61A8B3F96003D466D /* AppDelegate.m in Sources */,
 				315EC6B31A8B3F96003D466D /* main.m in Sources */,
+				319BF1F01A8DEF81007BAF77 /* SidebarViewController.m in Sources */,
 				319BF1CC1A8DC415007BAF77 /* ImageTextCell.m in Sources */,
 				315EC7061A8B4091003D466D /* HomeViewController.m in Sources */,
+				319BF1ED1A8DEC6E007BAF77 /* NewsFeedController.m in Sources */,
 				319BF1E61A8DE773007BAF77 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
