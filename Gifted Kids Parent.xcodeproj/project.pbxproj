@@ -36,6 +36,7 @@
 		315EC7021A8B3FCB003D466D /* Word_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6ED1A8B3FCB003D466D /* Word_62928.png */; };
 		315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */; };
 		315EC7061A8B4091003D466D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC7051A8B4091003D466D /* HomeViewController.m */; };
+		319BF1CC1A8DC415007BAF77 /* NewsFeedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1CB1A8DC415007BAF77 /* NewsFeedCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Word_small_62928.png; sourceTree = "<group>"; };
 		315EC7041A8B4091003D466D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		315EC7051A8B4091003D466D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		319BF1CA1A8DC415007BAF77 /* NewsFeedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsFeedCell.h; sourceTree = "<group>"; };
+		319BF1CB1A8DC415007BAF77 /* NewsFeedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				315EC6B51A8B3F96003D466D /* AppDelegate.m */,
 				315EC7041A8B4091003D466D /* HomeViewController.h */,
 				315EC7051A8B4091003D466D /* HomeViewController.m */,
+				319BF1CA1A8DC415007BAF77 /* NewsFeedCell.h */,
+				319BF1CB1A8DC415007BAF77 /* NewsFeedCell.m */,
 				315EC6C01A8B3F96003D466D /* Images.xcassets */,
 				315EC6C21A8B3F96003D466D /* LaunchScreen.xib */,
 				315EC6D91A8B3FCB003D466D /* Resources */,
@@ -317,6 +322,7 @@
 				315EC6B91A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld in Sources */,
 				315EC6B61A8B3F96003D466D /* AppDelegate.m in Sources */,
 				315EC6B31A8B3F96003D466D /* main.m in Sources */,
+				319BF1CC1A8DC415007BAF77 /* NewsFeedCell.m in Sources */,
 				315EC7061A8B4091003D466D /* HomeViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,8 +7,10 @@
 //
 
 #import "HomeViewController.h"
+#import "NewsFeedCell.h"
 
-@interface HomeViewController ()
+
+@interface HomeViewController () <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UILabel *progressBarFilled;
 
@@ -26,9 +28,10 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *coinCountLabel;
 
-@property (weak, nonatomic) IBOutlet UITableView *recentNewsTableView;
+@property (weak, nonatomic) IBOutlet UITableView *newsFeedTableView;
 
 @end
+
 
 @implementation HomeViewController
 
@@ -40,6 +43,14 @@
     
     // Update consecutive days label
     [self updateConsecutiveLabel];
+    
+    // Update word count, structure count, and coin count labels
+    [self updateWordCountLabel];
+    [self updateStructureCountLabel];
+    [self updateCoinCountLabel];
+    
+    // Update news feed table
+    [self updateNewsFeedTable];
 }
 
 
@@ -58,8 +69,6 @@
     
     float filledWidth = screenWidth * (currentCount - previousGoal) / (nextGoal - previousGoal);
     float emptyWidth = screenWidth - filledWidth;
-    NSLog(@"%.f-%.f", filledWidth, emptyWidth);
-    
     self.filledWidthConstraint.constant = filledWidth;
     self.emptyWidthConstraint.constant = emptyWidth;
 }
@@ -73,6 +82,55 @@
                                                                        attributes:@{NSFontAttributeName : font}];
     [message replaceCharactersInRange:NSMakeRange(3, message.length-5) withAttributedString:numberString];
     [self.consecutiveLabel setAttributedText:message];
+}
+
+- (void)updateWordCountLabel
+{
+    int wordCount = 267;
+    [self.wordCountLabel setText:[NSString stringWithFormat:@"%d", wordCount]];
+}
+
+- (void)updateStructureCountLabel
+{
+    int structureCount = 32;
+    [self.structureCountLabel setText:[NSString stringWithFormat:@"%d", structureCount]];
+}
+
+- (void)updateCoinCountLabel
+{
+    int coinCount = 1867;
+    [self.coinCountLabel setText:[NSString stringWithFormat:@"%d", coinCount]];
+}
+
+- (void)updateNewsFeedTable
+{
+    self.newsFeedTableView.dataSource = self;
+}
+
+
+#pragma mark - Table View Data Source
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 7;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NewsFeedCell *cell = (NewsFeedCell*)[tableView dequeueReusableCellWithIdentifier:@"newsFeedCell" forIndexPath:indexPath];
+    
+    if (indexPath.row % 3 == 0) {
+        [cell.image setImage:[UIImage imageNamed:@"Alarm_small_11222.png"]];
+        [cell.label setText:@"小明今天主动准时复习了！"];
+    }
+    else if (indexPath.row % 3 == 1) {
+        [cell.image setImage:[UIImage imageNamed:@"Sentence_small_59929.png"]];
+        [cell.label setText:@"昨天说对了一句中考句子！"];
+    }
+    else {
+        [cell.image setImage:[UIImage imageNamed:@"Coin_small_99355.png"]];
+        [cell.label setText:@"昨天挣了86个金币！"];
+    }
+    
+    return cell;
 }
 
 
