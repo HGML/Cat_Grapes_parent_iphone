@@ -42,6 +42,11 @@
 		319BF1EA1A8DE7D6007BAF77 /* Menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 319BF1E81A8DE7D6007BAF77 /* Menu@2x.png */; };
 		319BF1ED1A8DEC6E007BAF77 /* NewsFeedController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1EC1A8DEC6E007BAF77 /* NewsFeedController.m */; };
 		319BF1F01A8DEF81007BAF77 /* SidebarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319BF1EF1A8DEF81007BAF77 /* SidebarViewController.m */; };
+		4DDEEB2F1A8E433B00831652 /* BEMCircle.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEEB281A8E433B00831652 /* BEMCircle.m */; };
+		4DDEEB301A8E433B00831652 /* BEMLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEEB2A1A8E433B00831652 /* BEMLine.m */; };
+		4DDEEB311A8E433B00831652 /* BEMPermanentPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEEB2C1A8E433B00831652 /* BEMPermanentPopupView.m */; };
+		4DDEEB321A8E433B00831652 /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEEB2E1A8E433B00831652 /* BEMSimpleLineGraphView.m */; };
+		4DDEEB351A8E442A00831652 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEEB341A8E442A00831652 /* ReportViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +105,16 @@
 		319BF1EC1A8DEC6E007BAF77 /* NewsFeedController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsFeedController.m; sourceTree = "<group>"; };
 		319BF1EE1A8DEF81007BAF77 /* SidebarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SidebarViewController.h; sourceTree = "<group>"; };
 		319BF1EF1A8DEF81007BAF77 /* SidebarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SidebarViewController.m; sourceTree = "<group>"; };
+		4DDEEB271A8E433B00831652 /* BEMCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMCircle.h; sourceTree = "<group>"; };
+		4DDEEB281A8E433B00831652 /* BEMCircle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMCircle.m; sourceTree = "<group>"; };
+		4DDEEB291A8E433B00831652 /* BEMLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMLine.h; sourceTree = "<group>"; };
+		4DDEEB2A1A8E433B00831652 /* BEMLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMLine.m; sourceTree = "<group>"; };
+		4DDEEB2B1A8E433B00831652 /* BEMPermanentPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMPermanentPopupView.h; sourceTree = "<group>"; };
+		4DDEEB2C1A8E433B00831652 /* BEMPermanentPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMPermanentPopupView.m; sourceTree = "<group>"; };
+		4DDEEB2D1A8E433B00831652 /* BEMSimpleLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BEMSimpleLineGraphView.h; sourceTree = "<group>"; };
+		4DDEEB2E1A8E433B00831652 /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
+		4DDEEB331A8E442A00831652 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
+		4DDEEB341A8E442A00831652 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +159,7 @@
 				315EC6BD1A8B3F96003D466D /* Main.storyboard */,
 				315EC6B71A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld */,
 				319BF1E31A8DE773007BAF77 /* SWRevealViewController */,
+				4DDEEB261A8E433B00831652 /* BEMSimpleLineGraph */,
 				315EC6B41A8B3F96003D466D /* AppDelegate.h */,
 				315EC6B51A8B3F96003D466D /* AppDelegate.m */,
 				319BF1CA1A8DC415007BAF77 /* ImageTextCell.h */,
@@ -154,6 +170,8 @@
 				315EC7051A8B4091003D466D /* HomeViewController.m */,
 				319BF1EB1A8DEC6E007BAF77 /* NewsFeedController.h */,
 				319BF1EC1A8DEC6E007BAF77 /* NewsFeedController.m */,
+				4DDEEB331A8E442A00831652 /* ReportViewController.h */,
+				4DDEEB341A8E442A00831652 /* ReportViewController.m */,
 				315EC6C01A8B3F96003D466D /* Images.xcassets */,
 				315EC6C21A8B3F96003D466D /* LaunchScreen.xib */,
 				315EC6D91A8B3FCB003D466D /* Resources */,
@@ -225,6 +243,22 @@
 				319BF1E51A8DE773007BAF77 /* SWRevealViewController.m */,
 			);
 			path = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		4DDEEB261A8E433B00831652 /* BEMSimpleLineGraph */ = {
+			isa = PBXGroup;
+			children = (
+				4DDEEB271A8E433B00831652 /* BEMCircle.h */,
+				4DDEEB281A8E433B00831652 /* BEMCircle.m */,
+				4DDEEB291A8E433B00831652 /* BEMLine.h */,
+				4DDEEB2A1A8E433B00831652 /* BEMLine.m */,
+				4DDEEB2B1A8E433B00831652 /* BEMPermanentPopupView.h */,
+				4DDEEB2C1A8E433B00831652 /* BEMPermanentPopupView.m */,
+				4DDEEB2D1A8E433B00831652 /* BEMSimpleLineGraphView.h */,
+				4DDEEB2E1A8E433B00831652 /* BEMSimpleLineGraphView.m */,
+			);
+			name = BEMSimpleLineGraph;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,14 +401,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DDEEB301A8E433B00831652 /* BEMLine.m in Sources */,
 				315EC6B91A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld in Sources */,
+				4DDEEB321A8E433B00831652 /* BEMSimpleLineGraphView.m in Sources */,
 				315EC6B61A8B3F96003D466D /* AppDelegate.m in Sources */,
+				4DDEEB311A8E433B00831652 /* BEMPermanentPopupView.m in Sources */,
 				315EC6B31A8B3F96003D466D /* main.m in Sources */,
 				319BF1F01A8DEF81007BAF77 /* SidebarViewController.m in Sources */,
 				319BF1CC1A8DC415007BAF77 /* ImageTextCell.m in Sources */,
+				4DDEEB351A8E442A00831652 /* ReportViewController.m in Sources */,
 				315EC7061A8B4091003D466D /* HomeViewController.m in Sources */,
 				319BF1ED1A8DEC6E007BAF77 /* NewsFeedController.m in Sources */,
 				319BF1E61A8DE773007BAF77 /* SWRevealViewController.m in Sources */,
+				4DDEEB2F1A8E433B00831652 /* BEMCircle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,6 +568,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Gifted Kids ParentTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gifted Kids Parent.app/Gifted Kids Parent";
@@ -544,6 +584,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Gifted Kids ParentTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Gifted Kids Parent.app/Gifted Kids Parent";
