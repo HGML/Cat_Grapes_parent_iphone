@@ -42,13 +42,25 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set up navigation bar
+    UIBarButtonItem* sidebarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu.png"]
+                                                                      style:UIBarButtonItemStyleBordered
+                                                                     target:self.revealViewController
+                                                                     action:@selector(revealToggle:)];
+    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
+                                                                    style:UIBarButtonItemStyleBordered
+                                                                   target:self
+                                                                   action:@selector(logIn)];
+    [self.navigationItem setLeftBarButtonItem:sidebarButton];
+    [self.navigationItem setRightBarButtonItem:rightButton];
+    
+    
     // Set up SWRevealController
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController) {
-        [self.sidebarButton setTarget:self.revealViewController];
-        [self.sidebarButton setAction:@selector(revealToggle:)];
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
+    
     
     // Update progress bar
     [self updateProgressBar];
@@ -63,8 +75,11 @@
     
     // Update news feed table
     [self updateNewsFeedTable];
-    
-//    [self performSegueWithIdentifier:@"showLogIn" sender:self];
+}
+
+- (void)logIn
+{
+    [self performSegueWithIdentifier:@"showLogIn" sender:self];
 }
 
 

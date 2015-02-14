@@ -20,13 +20,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="jd4-WR-wnq" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="LwO-85-Ked"/>
                         <segue destination="8ZR-oC-j8j" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="WgJ-UO-XzJ"/>
+                        <segue destination="FCb-Yv-GbA" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="VSS-57-hrs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="daK-I6-Sym" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143" y="222"/>
+            <point key="canvasLocation" x="143" y="-81"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Vc4-qp-7yQ">
@@ -45,9 +45,29 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xKq-tj-Wd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="171" y="1022"/>
+            <point key="canvasLocation" x="561" y="1311"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Navigation Controller-->
+        <scene sceneID="wzX-gC-Sly">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="FCb-Yv-GbA" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="59G-7y-4g1">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jd4-WR-wnq" kind="relationship" relationship="rootViewController" id="qHU-8S-AvQ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="teH-VH-wog" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143" y="604"/>
+        </scene>
+        <!--Home View Controller - 主页-->
         <scene sceneID="eO4-Rb-Ve2">
             <objects>
                 <viewController id="jd4-WR-wnq" customClass="HomeViewController" sceneMemberID="viewController">
@@ -101,30 +121,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="30天" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2vN-jl-kWa">
-                                <rect key="frame" x="64" y="64" width="256" height="36"/>
+                                <rect key="frame" x="224" y="64" width="96" height="36"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFC-Ek-kx0">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="主页" id="Jcw-jG-8PB">
-                                        <barButtonItem key="leftBarButtonItem" image="Menu.png" id="mkG-yP-lxp"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="zWd-zP-yRX">
-                                            <connections>
-                                                <segue destination="E6D-BJ-1Pf" kind="push" identifier="showLogIn" id="8dC-SU-BLv"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Two lines 2.png" translatesAutoresizingMaskIntoConstraints="NO" id="4ku-dI-7Ft">
                                 <rect key="frame" x="16" y="197" width="288" height="127"/>
                             </imageView>
@@ -205,7 +207,7 @@
                                 <sections/>
                             </tableView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="22天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hji-ZP-IVd">
-                                <rect key="frame" x="0.0" y="64" width="64" height="36"/>
+                                <rect key="frame" x="0.0" y="64" width="224" height="36"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,15 +216,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="主页" id="3yd-Wz-yVT"/>
                     <connections>
                         <outlet property="coinCountLabel" destination="nHJ-gV-2J0" id="d45-YI-nlx"/>
                         <outlet property="consecutiveLabel" destination="SNu-Sl-euj" id="cvX-U2-WGX"/>
                         <outlet property="newsFeedTableView" destination="sPv-kK-FEi" id="21K-1B-w6I"/>
                         <outlet property="progressBarEmpty" destination="2vN-jl-kWa" id="XeZ-eQ-T3t"/>
                         <outlet property="progressBarFilled" destination="hji-ZP-IVd" id="wm1-XH-OQk"/>
-                        <outlet property="sidebarButton" destination="mkG-yP-lxp" id="04f-Ou-M8p"/>
                         <outlet property="structureCountLabel" destination="ULm-OQ-May" id="2Ot-M7-2dy"/>
                         <outlet property="wordCountLabel" destination="PgD-eY-Pln" id="8Bh-T4-97g"/>
+                        <segue destination="E6D-BJ-1Pf" kind="push" identifier="showLogIn" id="lUt-et-QGG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pI1-6Y-Ssk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -398,7 +401,7 @@
                                         <connections>
                                             <outlet property="image" destination="tv0-Uq-ecj" id="Cqe-yt-mtv"/>
                                             <outlet property="label" destination="4vp-ZJ-b09" id="gMc-VO-tQQ"/>
-                                            <segue destination="jd4-WR-wnq" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="MxN-3Q-JNE"/>
+                                            <segue destination="FCb-Yv-GbA" kind="custom" identifier="showHome" customClass="SWRevealViewControllerSeguePushController" id="8ut-c0-Ta4"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="achievementCell" id="JBB-5o-ece" customClass="ImageTextCell">
@@ -507,7 +510,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rHA-OW-1pg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="869" y="-81"/>
+            <point key="canvasLocation" x="561" y="-81"/>
         </scene>
     </scenes>
     <resources>
@@ -531,6 +534,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="MxN-3Q-JNE"/>
+        <segue reference="8ut-c0-Ta4"/>
     </inferredMetricsTieBreakers>
 </document>
