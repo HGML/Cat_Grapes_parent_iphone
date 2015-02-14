@@ -294,17 +294,41 @@
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s3R-ga-ezE">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hvX-0y-Y6S">
+                                        <rect key="frame" x="20" y="456" width="110" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="新增"/>
+                                            <segment title="总数"/>
+                                        </segments>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </segmentedControl>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="V1B-R4-0Wo">
+                                        <rect key="frame" x="150" y="456" width="150" height="29"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <segments>
+                                            <segment title="周"/>
+                                            <segment title="月"/>
+                                            <segment title="年"/>
+                                        </segments>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </segmentedControl>
+                                </subviews>
                                 <color key="backgroundColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VNv-eu-7iv" customClass="BEMSimpleLineGraphView">
-                                <rect key="frame" x="20" y="64" width="280" height="484"/>
+                                <rect key="frame" x="20" y="64" width="280" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="countPeriodSegmentedControl" destination="V1B-R4-0Wo" id="FMZ-Dk-f5p"/>
+                        <outlet property="countTypeSegmentedControl" destination="hvX-0y-Y6S" id="WNG-ri-ZtR"/>
                         <outlet property="sidebarButton" destination="USY-JL-wbg" id="cmF-56-HNH"/>
-                        <outlet property="totalWordLineGraph" destination="VNv-eu-7iv" id="56R-Uv-sRu"/>
+                        <outlet property="wordLineGraph" destination="VNv-eu-7iv" id="rsq-hn-bF3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z16-pY-7KG" userLabel="First Responder" sceneMemberID="firstResponder"/>

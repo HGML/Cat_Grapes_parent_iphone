@@ -12,15 +12,29 @@
 #import "BEMSimpleLineGraphView.h"
 
 
+typedef enum{added = 0, total} CountType;
+
+typedef enum{week = 0, month, year} CountPeriod;
+
+
 @interface ReportViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
-@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *totalWordLineGraph;
+@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *wordLineGraph;
 
-@property (nonatomic, strong) NSArray* days;
+@property (weak, nonatomic) IBOutlet UISegmentedControl *countTypeSegmentedControl;
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *countPeriodSegmentedControl;
+
+@property (nonatomic) CountType type;
+
+@property (nonatomic) CountPeriod period;
+
 
 @property (nonatomic, strong) NSArray* words;
+
+@property (nonatomic, strong) NSArray* allWords;
 
 @end
 
@@ -37,14 +51,90 @@
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
-    self.days = [NSArray arrayWithObjects:@"Day 1", @"Day 2", @"Day 3", @"Day 4", @"Day 5", nil];
-    self.words = [NSArray arrayWithObjects:[NSNumber numberWithInt:238], [NSNumber numberWithInt:242], [NSNumber numberWithInt:253], [NSNumber numberWithInt:260], [NSNumber numberWithInt:269], nil];
-    
-    self.totalWordLineGraph.delegate = self;
-    self.totalWordLineGraph.dataSource = self;
-    
+    // Set up graph
+    self.wordLineGraph.delegate = self;
+    self.wordLineGraph.dataSource = self;
     [self configureGraph];
+    
+    // Set up segmented control
+    [self.countTypeSegmentedControl addTarget:self
+                                       action:@selector(countTypeChanged:)
+                             forControlEvents:UIControlEventValueChanged];
+    [self.countPeriodSegmentedControl addTarget:self
+                                         action:@selector(countPeriodChanged:)
+                               forControlEvents:UIControlEventValueChanged];
+    
+    // Load graph data
+    self.allWords = [NSArray arrayWithObjects:@"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", nil];
+    [self reloadData];
 }
+
+- (void)reloadData
+{
+    switch (self.type) {
+        case added:
+            switch (self.period) {
+                case week:
+                    self.words = [NSArray arrayWithObjects:@"8", @"4", @"11", @"7", @"9", @"3", @"10", nil];
+                    break;
+                    
+                case month:
+                    
+                    break;
+                    
+                case year:
+                    
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        case total:
+            switch (self.period) {
+                case week:
+                    self.words = [self.allWords subarrayWithRange:NSMakeRange(0, 7)];
+                    break;
+                    
+                case month:
+                    self.words = [self.allWords subarrayWithRange:NSMakeRange(0, 30)];
+                    break;
+                    
+                case year:
+                    self.words = self.allWords;
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    // Reload graph
+    [self.wordLineGraph reloadGraph];
+}
+
+
+#pragma mark - Segmented Control
+
+- (void)countTypeChanged:(UISegmentedControl*)control
+{
+    self.type = (int)control.selectedSegmentIndex;
+    [self reloadData];
+}
+
+- (void)countPeriodChanged:(UISegmentedControl*)control
+{
+    self.period = (int)control.selectedSegmentIndex;
+    [self reloadData];
+}
+
+
+#pragma mark - Configure Graph
 
 - (void)configureGraph
 {
@@ -55,26 +145,26 @@
         1.0, 1.0, 1.0, 1.0,
         1.0, 1.0, 1.0, 0.0
     };
-//    UIColor* themeColor = [UIColor colorWithRed:255.0/255.0 green:128.0/255.0 blue:0.0/255.0 alpha:1.0];
     UIColor* themeColor = [UIColor orangeColor];
+//    UIColor* themeColor = [UIColor colorWithRed:255.0/255.0 green:128.0/255.0 blue:0.0/255.0 alpha:1.0];
     
-    self.totalWordLineGraph.gradientBottom = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
-    self.totalWordLineGraph.colorTop = themeColor;
-    self.totalWordLineGraph.colorBottom = themeColor;
-    self.totalWordLineGraph.colorLine = [UIColor whiteColor];
-    self.totalWordLineGraph.colorXaxisLabel = [UIColor whiteColor];
-    self.totalWordLineGraph.colorYaxisLabel = [UIColor whiteColor];
-    self.totalWordLineGraph.widthLine = 3.0;
-    self.totalWordLineGraph.enableTouchReport = YES;
-    self.totalWordLineGraph.enablePopUpReport = YES;
-    self.totalWordLineGraph.enableBezierCurve = NO;
-    self.totalWordLineGraph.enableYAxisLabel = YES;
-    self.totalWordLineGraph.autoScaleYAxis = YES;
-    self.totalWordLineGraph.alwaysDisplayDots = YES;
-    self.totalWordLineGraph.enableReferenceXAxisLines = NO;
-    self.totalWordLineGraph.enableReferenceYAxisLines = YES;
-    self.totalWordLineGraph.enableReferenceAxisFrame = YES;
-    self.totalWordLineGraph.animationGraphStyle = BEMLineAnimationDraw;
+    self.wordLineGraph.gradientBottom = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
+    self.wordLineGraph.colorTop = themeColor;
+    self.wordLineGraph.colorBottom = themeColor;
+    self.wordLineGraph.colorLine = [UIColor whiteColor];
+    self.wordLineGraph.colorXaxisLabel = [UIColor whiteColor];
+    self.wordLineGraph.colorYaxisLabel = [UIColor whiteColor];
+    self.wordLineGraph.widthLine = 3.0;
+    self.wordLineGraph.enableTouchReport = YES;
+    self.wordLineGraph.enablePopUpReport = YES;
+    self.wordLineGraph.enableBezierCurve = YES;
+    self.wordLineGraph.enableYAxisLabel = YES;
+    self.wordLineGraph.autoScaleYAxis = YES;
+    self.wordLineGraph.alwaysDisplayDots = NO;
+    self.wordLineGraph.enableReferenceXAxisLines = NO;
+    self.wordLineGraph.enableReferenceYAxisLines = YES;
+    self.wordLineGraph.enableReferenceAxisFrame = YES;
+    self.wordLineGraph.animationGraphStyle = BEMLineAnimationDraw;
 }
 
 
@@ -91,11 +181,26 @@
 #pragma mark - SimpleLineGraph Delegate
 
 - (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
-    return 0;
+    switch (self.period) {
+        case week:
+            return 2;
+            break;
+            
+        case month:
+            return 5;
+            break;
+            
+        case year:
+            return 30;
+            
+        default:
+            return 0;
+            break;
+    }
 }
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
-    NSString *label = [self.days objectAtIndex:index];
+    NSString *label = [NSString stringWithFormat:@"Day %ld", index + 1];
     return [label stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
 }
 
