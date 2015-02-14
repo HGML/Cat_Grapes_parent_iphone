@@ -7,13 +7,16 @@
 //
 
 #import "ReportViewController.h"
+#import "SWRevealViewController.h"
+
 #import "BEMSimpleLineGraphView.h"
+
 
 @interface ReportViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
-@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *totalWordLineGraph;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
 
-//@property (nonatomic, strong) NSDictionary* wordCountForDay;
+@property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *totalWordLineGraph;
 
 @property (nonatomic, strong) NSArray* days;
 
@@ -26,6 +29,14 @@
 
 - (void)viewDidLoad
 {
+    // Set up SWRevealController
+    SWRevealViewController *revealViewController = self.revealViewController;
+    if (revealViewController) {
+        [self.sidebarButton setTarget:self.revealViewController];
+        [self.sidebarButton setAction:@selector(revealToggle:)];
+        [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
+    
     self.days = [NSArray arrayWithObjects:@"Day 1", @"Day 2", @"Day 3", @"Day 4", @"Day 5", nil];
     self.words = [NSArray arrayWithObjects:[NSNumber numberWithInt:238], [NSNumber numberWithInt:242], [NSNumber numberWithInt:253], [NSNumber numberWithInt:260], [NSNumber numberWithInt:269], nil];
     
