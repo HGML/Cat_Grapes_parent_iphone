@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xKq-tj-Wd1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="561" y="1311"/>
+            <point key="canvasLocation" x="1429" y="-1396"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wzX-gC-Sly">
@@ -65,7 +65,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="teH-VH-wog" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="143" y="604"/>
+            <point key="canvasLocation" x="1002" y="-730"/>
         </scene>
         <!--Home View Controller - 主页-->
         <scene sceneID="eO4-Rb-Ve2">
@@ -230,9 +230,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pI1-6Y-Ssk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="561" y="604"/>
+            <point key="canvasLocation" x="1429" y="-730"/>
         </scene>
-        <!--News Feed Controller-->
+        <!--News Feed Controller - 报喜啦-->
         <scene sceneID="fWz-Dp-oED">
             <objects>
                 <tableViewController id="df4-9o-7Xv" customClass="NewsFeedController" sceneMemberID="viewController">
@@ -240,23 +240,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" translucent="NO" id="0Xp-GK-sdH">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <textAttributes key="titleTextAttributes">
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </textAttributes>
-                            <items>
-                                <navigationItem title="报喜啦" id="hLx-zP-96c">
-                                    <barButtonItem key="leftBarButtonItem" image="Menu.png" id="h4t-j1-uiI"/>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="newsFeedCell" id="y92-rk-Xtr" customClass="ImageTextCell">
-                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y92-rk-Xtr" id="yUy-hU-7y1">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -284,15 +270,13 @@
                             <outlet property="delegate" destination="df4-9o-7Xv" id="oNw-MG-7R9"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <outlet property="sidebarButton" destination="h4t-j1-uiI" id="0iO-jG-v7Z"/>
-                    </connections>
+                    <navigationItem key="navigationItem" title="报喜啦" id="eCy-UD-trN"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bK0-xR-fhO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="951" y="604"/>
+            <point key="canvasLocation" x="1429" y="-81"/>
         </scene>
-        <!--Report View Controller-->
+        <!--Report View Controller - 足迹-->
         <scene sceneID="K8i-GJ-zhX">
             <objects>
                 <viewController id="NPS-8J-Ng8" customClass="ReportViewController" sceneMemberID="viewController">
@@ -304,63 +288,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e88-y3-JQA">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="足迹" id="ji4-zp-3YP">
-                                        <barButtonItem key="leftBarButtonItem" image="Menu.png" id="USY-JL-wbg"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="s3R-ga-ezE">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hvX-0y-Y6S">
-                                        <rect key="frame" x="20" y="456" width="110" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="新增"/>
-                                            <segment title="总数"/>
-                                        </segments>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </segmentedControl>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="V1B-R4-0Wo">
-                                        <rect key="frame" x="150" y="456" width="150" height="29"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <segments>
-                                            <segment title="周"/>
-                                            <segment title="月"/>
-                                            <segment title="年"/>
-                                        </segments>
-                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </segmentedControl>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VNv-eu-7iv" customClass="BEMSimpleLineGraphView">
                                 <rect key="frame" x="20" y="64" width="280" height="440"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hvX-0y-Y6S">
+                                <rect key="frame" x="20" y="520" width="110" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="新增"/>
+                                    <segment title="总数"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="V1B-R4-0Wo">
+                                <rect key="frame" x="150" y="520" width="150" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="周"/>
+                                    <segment title="月"/>
+                                    <segment title="年"/>
+                                </segments>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
                         </subviews>
+                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" title="足迹" id="Aae-at-7DI"/>
                     <connections>
                         <outlet property="countPeriodSegmentedControl" destination="V1B-R4-0Wo" id="FMZ-Dk-f5p"/>
                         <outlet property="countTypeSegmentedControl" destination="hvX-0y-Y6S" id="WNG-ri-ZtR"/>
-                        <outlet property="sidebarButton" destination="USY-JL-wbg" id="cmF-56-HNH"/>
                         <outlet property="wordLineGraph" destination="VNv-eu-7iv" id="rsq-hn-bF3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z16-pY-7KG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1333" y="604"/>
+            <point key="canvasLocation" x="1429" y="573"/>
         </scene>
         <!--Sidebar View Controller-->
         <scene sceneID="koL-Z7-p4Z">
@@ -426,7 +390,7 @@
                                         <connections>
                                             <outlet property="image" destination="5Jk-Na-WLQ" id="5Z8-NG-MrQ"/>
                                             <outlet property="label" destination="QfL-CT-sbZ" id="Ls5-ye-2yZ"/>
-                                            <segue destination="df4-9o-7Xv" kind="custom" identifier="showNewsFeed" customClass="SWRevealViewControllerSeguePushController" id="uh4-KY-4we"/>
+                                            <segue destination="7LL-FD-YNN" kind="custom" identifier="showNewsFeed" customClass="SWRevealViewControllerSeguePushController" id="3fi-gj-oMg"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="reportCell" id="4Nz-mr-DIX" customClass="ImageTextCell">
@@ -451,7 +415,7 @@
                                         <connections>
                                             <outlet property="image" destination="oOf-ah-H6u" id="Hcy-oa-Vug"/>
                                             <outlet property="label" destination="FCM-wP-uGi" id="1cU-L3-vOM"/>
-                                            <segue destination="NPS-8J-Ng8" kind="custom" identifier="showReport" customClass="SWRevealViewControllerSeguePushController" id="m5v-VO-KNn"/>
+                                            <segue destination="D7P-HJ-Apw" kind="custom" identifier="showReport" customClass="SWRevealViewControllerSeguePushController" id="0xG-c4-A2h"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="contractCell" id="qyg-aJ-6sb" customClass="ImageTextCell">
@@ -512,6 +476,46 @@
             </objects>
             <point key="canvasLocation" x="561" y="-81"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Sj4-GD-AnP">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="7LL-FD-YNN" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aFY-5c-11l">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="df4-9o-7Xv" kind="relationship" relationship="rootViewController" id="50C-Ym-Gvq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jnl-Nh-TLi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1002" y="-81"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="uZp-8a-aZb">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="D7P-HJ-Apw" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="far-QK-Atz">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="NPS-8J-Ng8" kind="relationship" relationship="rootViewController" id="42O-2E-8ju"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vil-bN-GgE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1002" y="573"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Achievement_55588.png" width="600" height="600"/>
@@ -519,7 +523,6 @@
         <image name="Coin_99355.png" width="600" height="600"/>
         <image name="Contract_59244.png" width="600" height="600"/>
         <image name="Home_56766.png" width="600" height="600"/>
-        <image name="Menu.png" width="28" height="20"/>
         <image name="Report_20789.png" width="600" height="600"/>
         <image name="Sentence_59929.png" width="600" height="600"/>
         <image name="Setting_45236.png" width="600" height="600"/>

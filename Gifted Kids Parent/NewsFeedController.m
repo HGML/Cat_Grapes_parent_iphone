@@ -14,8 +14,6 @@
 
 @interface NewsFeedController ()
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-
 @end
 
 
@@ -24,11 +22,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Set up navigation bar
+    UIBarButtonItem* sidebarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu.png"]
+                                                                      style:UIBarButtonItemStyleBordered
+                                                                     target:self.revealViewController
+                                                                     action:@selector(revealToggle:)];
+    [self.navigationItem setLeftBarButtonItem:sidebarButton];
+    
+    
     // Set up SWRevealController
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController) {
-        [self.sidebarButton setTarget:self.revealViewController];
-        [self.sidebarButton setAction:@selector(revealToggle:)];
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     

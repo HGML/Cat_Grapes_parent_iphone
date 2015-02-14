@@ -14,8 +14,6 @@
 
 @interface HomeViewController () <UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-
 @property (weak, nonatomic) IBOutlet UILabel *progressBarFilled;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *filledWidthConstraint;

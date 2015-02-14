@@ -19,8 +19,6 @@ typedef enum{week = 0, month, year} CountPeriod;
 
 @interface ReportViewController () <BEMSimpleLineGraphDataSource, BEMSimpleLineGraphDelegate>
 
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *sidebarButton;
-
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *wordLineGraph;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *countTypeSegmentedControl;
@@ -43,11 +41,17 @@ typedef enum{week = 0, month, year} CountPeriod;
 
 - (void)viewDidLoad
 {
+    // Set up navigation bar
+    UIBarButtonItem* sidebarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Menu.png"]
+                                                                      style:UIBarButtonItemStyleBordered
+                                                                     target:self.revealViewController
+                                                                     action:@selector(revealToggle:)];
+    [self.navigationItem setLeftBarButtonItem:sidebarButton];
+    
+    
     // Set up SWRevealController
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController) {
-        [self.sidebarButton setTarget:self.revealViewController];
-        [self.sidebarButton setAction:@selector(revealToggle:)];
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     }
     
@@ -183,7 +187,7 @@ typedef enum{week = 0, month, year} CountPeriod;
 - (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
     switch (self.period) {
         case week:
-            return 2;
+            return 1;
             break;
             
         case month:
