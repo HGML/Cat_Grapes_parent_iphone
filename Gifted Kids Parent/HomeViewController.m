@@ -63,6 +63,8 @@
     
     // Update news feed table
     [self updateNewsFeedTable];
+    
+//    [self performSegueWithIdentifier:@"showLogIn" sender:self];
 }
 
 

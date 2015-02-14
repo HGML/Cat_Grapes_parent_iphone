@@ -145,7 +145,7 @@ typedef enum{week = 0, month, year} CountPeriod;
         1.0, 1.0, 1.0, 1.0,
         1.0, 1.0, 1.0, 0.0
     };
-    UIColor* themeColor = [UIColor orangeColor];
+    UIColor* themeColor = [UIColor redColor];
 //    UIColor* themeColor = [UIColor colorWithRed:255.0/255.0 green:128.0/255.0 blue:0.0/255.0 alpha:1.0];
     
     self.wordLineGraph.gradientBottom = CGGradientCreateWithColorComponents(colorspace, components, locations, num_locations);
