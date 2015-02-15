@@ -48,7 +48,7 @@
     UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
                                                                     style:UIBarButtonItemStyleBordered
                                                                    target:self
-                                                                   action:@selector(logIn)];
+                                                                   action:@selector(showLogIn)];
     [self.navigationItem setLeftBarButtonItem:sidebarButton];
     [self.navigationItem setRightBarButtonItem:rightButton];
     
@@ -75,7 +75,7 @@
     [self updateNewsFeedTable];
 }
 
-- (void)logIn
+- (void)showLogIn
 {
     [self performSegueWithIdentifier:@"showLogIn" sender:self];
 }
