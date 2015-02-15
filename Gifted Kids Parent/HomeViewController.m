@@ -45,18 +45,26 @@
                                                                       style:UIBarButtonItemStyleBordered
                                                                      target:self.revealViewController
                                                                      action:@selector(revealToggle:)];
-    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
-                                                                    style:UIBarButtonItemStyleBordered
-                                                                   target:self
-                                                                   action:@selector(showLogIn)];
+//    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
+//                                                                    style:UIBarButtonItemStyleBordered
+//                                                                   target:self
+//                                                                   action:@selector(showLogIn)];
     [self.navigationItem setLeftBarButtonItem:sidebarButton];
-    [self.navigationItem setRightBarButtonItem:rightButton];
+//    [self.navigationItem setRightBarButtonItem:rightButton];
     
     
     // Set up SWRevealController
     SWRevealViewController *revealViewController = self.revealViewController;
     if (revealViewController) {
         [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    }
+    
+    
+    // Check if logged in
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isLoggedIn"];   // TEST PURPOSE
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];   // TEST PURPOSE
+    if (! [[[NSUserDefaults standardUserDefaults] objectForKey:@"isLoggedIn"] boolValue]) {
+        [self performSegueWithIdentifier:@"showLogIn" sender:self];
     }
     
     
@@ -75,10 +83,10 @@
     [self updateNewsFeedTable];
 }
 
-- (void)showLogIn
-{
-    [self performSegueWithIdentifier:@"showLogIn" sender:self];
-}
+//- (void)showLogIn
+//{
+//    [self performSegueWithIdentifier:@"showLogIn" sender:self];
+//}
 
 
 #pragma mark - Setup

@@ -42,8 +42,9 @@ typedef enum{logIn = 0, signUp} State;
     self.userInfoTableView.dataSource = self;
     
     // Set up submit (log in or sign up) button
-    [self.submitButton setEnabled:NO];
     self.state = logIn;
+    [self.submitButton setEnabled:NO];
+    [self.submitButton setEnabled:YES];   // TEST PURPOSE
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,6 +96,8 @@ typedef enum{logIn = 0, signUp} State;
             [cell.textField setTag:0];
             [cell.textField setKeyboardType:UIKeyboardTypeEmailAddress];
             [cell.textField setReturnKeyType:UIReturnKeyNext];
+            [cell.textField setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
+            [cell.textField setText:@"sysamli"];   // TEST PURPOSE
             break;
             
         case 1:
@@ -102,6 +105,7 @@ typedef enum{logIn = 0, signUp} State;
             [cell.textField setTag:1];
             [cell.textField setSecureTextEntry:YES];
             [cell.textField setReturnKeyType:UIReturnKeyGo];
+            [cell.textField setText:@"951117"];   // TEST PURPOSE
             
         default:
             break;
@@ -153,6 +157,7 @@ typedef enum{logIn = 0, signUp} State;
 
 - (IBAction)submitPressed:(id)sender
 {
+    // Get username and password
     FormFieldCell* usernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:0 inSection:0]];
     NSString* username = usernameCell.textField.text;
@@ -160,7 +165,27 @@ typedef enum{logIn = 0, signUp} State;
                                                    [NSIndexPath indexPathForRow:1 inSection:0]];
     NSString* password = passwordCell.textField.text;
     
+    // Perform log in or sign up
+    switch (self.state) {
+        case logIn:
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            break;
+            
+        case signUp:
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            break;
+            
+        default:
+            break;
+    }
+    
     NSLog(@"%@: Username: %@ Password: %@", self.state == logIn ? @"Log in" : @"Sign up", username, password);
+    
+    // Return to Home
+    [self.navigationController setNavigationBarHidden:NO];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 
