@@ -8,6 +8,9 @@
 
 #import "LogInViewController.h"
 #import "FormFieldCell.h"
+#import <QuartzCore/QuartzCore.h>
+
+#import <BmobSDK/Bmob.h>
 
 
 typedef enum{logIn = 0, signUp} State;
@@ -45,6 +48,11 @@ typedef enum{logIn = 0, signUp} State;
     self.state = logIn;
     [self.submitButton setEnabled:NO];
     [self.submitButton setEnabled:YES];   // TEST PURPOSE
+    
+    // Set up Log in/Sign up toggle button
+    self.logInSignUpToggleButton.layer.borderWidth = 0.6f;
+    self.logInSignUpToggleButton.layer.borderColor = [[UIColor whiteColor] CGColor];
+    self.logInSignUpToggleButton.layer.cornerRadius = 8.0f;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -168,13 +176,11 @@ typedef enum{logIn = 0, signUp} State;
     // Perform log in or sign up
     switch (self.state) {
         case logIn:
-            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            [self logInWithUsername:username andPassword:password];
             break;
             
         case signUp:
-            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            [self signUpWithUsername:username andPassword:password];
             break;
             
         default:
@@ -182,8 +188,49 @@ typedef enum{logIn = 0, signUp} State;
     }
     
     NSLog(@"%@: Username: %@ Password: %@", self.state == logIn ? @"Log in" : @"Sign up", username, password);
-    
-    // Return to Home
+}
+
+- (void)logInWithUsername:(NSString*)username andPassword:(NSString*)password
+{
+    [BmobUser loginWithUsernameInBackground:username password:password block:^(BmobUser* user, NSError* error){
+        if (! error) {
+            NSLog(@"Logged in for user %@ password %@", username, password);
+            
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            
+            // Return to Home
+            [self showHome];
+        }
+        else {
+            NSLog(@"ERROR: Can't log in\n%@", error.description);
+        }
+    }];
+}
+
+- (void)signUpWithUsername:(NSString*)username andPassword:(NSString*)password
+{
+    BmobUser *bUser = [[BmobUser alloc] init];
+    [bUser setUserName:username];
+    [bUser setPassword:password];
+    [bUser signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
+        if (isSuccessful) {
+            NSLog(@"Signed up for user %@ password %@", username, password);
+            
+            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            
+            // Return to Home
+            [self showHome];
+        }
+        else {
+            NSLog(@"ERROR: Can't sign up\n%@", error.description);
+        }
+    }];
+}
+
+- (void)showHome
+{
     [self.navigationController setNavigationBarHidden:NO];
     [self.navigationController popViewControllerAnimated:NO];
 }

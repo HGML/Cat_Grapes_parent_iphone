@@ -77,9 +77,9 @@
                                 <sections/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RPY-jB-jAe">
-                                <rect key="frame" x="16" y="224" width="288" height="36"/>
+                                <rect key="frame" x="16" y="190" width="288" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="bkg-8d-N59"/>
+                                    <constraint firstAttribute="height" constant="36" id="n2K-6x-fbJ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="登录">
@@ -93,12 +93,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0q8-0e-SE3">
-                                <rect key="frame" x="258" y="28" width="46" height="30"/>
+                                <rect key="frame" x="264" y="28" width="40" height="18"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="LXy-zq-HMh"/>
-                                    <constraint firstAttribute="height" constant="30" id="dPW-dG-zdC"/>
+                                    <constraint firstAttribute="width" constant="40" id="Ig9-zA-W7N"/>
+                                    <constraint firstAttribute="height" constant="18" id="v9u-D0-pDu"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="注册">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -107,11 +107,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bqH-aW-NRO">
-                                <rect key="frame" x="16" y="268" width="288" height="30"/>
+                                <rect key="frame" x="16" y="234" width="288" height="24"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="G8k-8x-Ljw"/>
+                                    <constraint firstAttribute="height" constant="24" id="6ZS-xF-cY6"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <state key="normal" title="忘记密码">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -122,18 +122,18 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="cIT-Pl-OQv" firstAttribute="top" secondItem="bqH-aW-NRO" secondAttribute="bottom" constant="270" id="8av-TB-aQU"/>
-                            <constraint firstItem="jIW-eB-scw" firstAttribute="top" secondItem="0q8-0e-SE3" secondAttribute="bottom" constant="27" id="HjT-hG-Zq2"/>
-                            <constraint firstItem="bqH-aW-NRO" firstAttribute="top" secondItem="RPY-jB-jAe" secondAttribute="bottom" constant="8" symbolic="YES" id="KIi-vL-Rc0"/>
-                            <constraint firstItem="RPY-jB-jAe" firstAttribute="leading" secondItem="bqH-aW-NRO" secondAttribute="leading" id="MHP-EH-OKW"/>
-                            <constraint firstItem="0q8-0e-SE3" firstAttribute="top" secondItem="G1j-71-rDX" secondAttribute="bottom" constant="8" symbolic="YES" id="OaZ-zm-w5n"/>
-                            <constraint firstItem="0q8-0e-SE3" firstAttribute="trailing" secondItem="WAL-Sl-D9x" secondAttribute="trailingMargin" id="TPv-eV-iT1"/>
-                            <constraint firstItem="bqH-aW-NRO" firstAttribute="leading" secondItem="WAL-Sl-D9x" secondAttribute="leadingMargin" id="Xrx-Fx-dqE"/>
-                            <constraint firstItem="bqH-aW-NRO" firstAttribute="trailing" secondItem="RPY-jB-jAe" secondAttribute="trailing" id="Yep-KY-Pyh"/>
-                            <constraint firstItem="jIW-eB-scw" firstAttribute="leading" secondItem="RPY-jB-jAe" secondAttribute="leading" id="d1K-o5-7TH"/>
-                            <constraint firstItem="RPY-jB-jAe" firstAttribute="top" secondItem="jIW-eB-scw" secondAttribute="bottom" constant="51" id="gYg-Pc-7e8"/>
-                            <constraint firstItem="jIW-eB-scw" firstAttribute="trailing" secondItem="RPY-jB-jAe" secondAttribute="trailing" id="xDh-1e-dYf"/>
-                            <constraint firstItem="jIW-eB-scw" firstAttribute="trailing" secondItem="0q8-0e-SE3" secondAttribute="trailing" id="xaL-cc-mLH"/>
+                            <constraint firstItem="cIT-Pl-OQv" firstAttribute="top" secondItem="bqH-aW-NRO" secondAttribute="bottom" constant="310" id="03d-BC-LxR"/>
+                            <constraint firstItem="bqH-aW-NRO" firstAttribute="top" secondItem="RPY-jB-jAe" secondAttribute="bottom" constant="8" symbolic="YES" id="0u6-Cz-5Lx"/>
+                            <constraint firstItem="bqH-aW-NRO" firstAttribute="trailing" secondItem="WAL-Sl-D9x" secondAttribute="trailingMargin" id="CWJ-Pg-3it"/>
+                            <constraint firstItem="bqH-aW-NRO" firstAttribute="leading" secondItem="WAL-Sl-D9x" secondAttribute="leadingMargin" id="Gn0-07-Hhb"/>
+                            <constraint firstItem="jIW-eB-scw" firstAttribute="leading" secondItem="RPY-jB-jAe" secondAttribute="leading" id="KgW-ag-yND"/>
+                            <constraint firstItem="jIW-eB-scw" firstAttribute="top" secondItem="0q8-0e-SE3" secondAttribute="bottom" constant="39" id="QdF-h9-9Sz"/>
+                            <constraint firstItem="0q8-0e-SE3" firstAttribute="top" secondItem="G1j-71-rDX" secondAttribute="bottom" constant="8" symbolic="YES" id="QlM-zD-r2Y"/>
+                            <constraint firstItem="jIW-eB-scw" firstAttribute="trailing" secondItem="RPY-jB-jAe" secondAttribute="trailing" id="X9g-yk-B0p"/>
+                            <constraint firstItem="RPY-jB-jAe" firstAttribute="top" secondItem="jIW-eB-scw" secondAttribute="bottom" constant="17" id="rTq-ej-rVn"/>
+                            <constraint firstItem="RPY-jB-jAe" firstAttribute="leading" secondItem="bqH-aW-NRO" secondAttribute="leading" id="sTr-pJ-dzK"/>
+                            <constraint firstItem="RPY-jB-jAe" firstAttribute="trailing" secondItem="bqH-aW-NRO" secondAttribute="trailing" id="tuc-55-8kh"/>
+                            <constraint firstItem="jIW-eB-scw" firstAttribute="trailing" secondItem="0q8-0e-SE3" secondAttribute="trailing" id="zGI-2h-K60"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="登录" id="Jww-jc-MFy"/>
