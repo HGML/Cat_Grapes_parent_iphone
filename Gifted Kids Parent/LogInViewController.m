@@ -10,11 +10,18 @@
 #import "FormFieldCell.h"
 
 
+typedef enum{logIn = 0, signUp} State;
+
 @interface LogInViewController () <UITableViewDataSource, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *logInTableView;
+@property (weak, nonatomic) IBOutlet UIButton *logInSignUpToggleButton;
 
-@property (weak, nonatomic) IBOutlet UIButton *logInButton;
+@property (nonatomic) State state;
+
+
+@property (weak, nonatomic) IBOutlet UITableView *userInfoTableView;
+
+@property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
 @property (nonatomic) BOOL hasUsername;
 
@@ -31,11 +38,12 @@
     // Set up navigation bar
     [self.navigationController setNavigationBarHidden:YES];
     
-    // Update log in table view
-    [self updateLogInTable];
+    // Set up user info table view
+    self.userInfoTableView.dataSource = self;
     
-    // Set up log in button
-    [self.logInButton setEnabled:NO];
+    // Set up submit (log in or sign up) button
+    [self.submitButton setEnabled:NO];
+    self.state = logIn;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,9 +52,26 @@
 }
 
 
-- (void)updateLogInTable
+#pragma mark - Toggle Log in/Sign up
+
+- (IBAction)logInSignUpTogglePressed:(id)sender
 {
-    self.logInTableView.dataSource = self;
+    switch (self.state) {
+        case logIn:
+            self.state = signUp;
+            [self.submitButton setTitle:@"注册" forState:UIControlStateNormal];
+            [self.logInSignUpToggleButton setTitle:@"登录" forState:UIControlStateNormal];
+            break;
+            
+        case signUp:
+            self.state = logIn;
+            [self.submitButton setTitle:@"登录" forState:UIControlStateNormal];
+            [self.logInSignUpToggleButton setTitle:@"注册" forState:UIControlStateNormal];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
@@ -103,20 +128,20 @@
             break;
     }
     
-    [self.logInButton setEnabled:(self.hasUsername && self.hasPassword)];
+    [self.submitButton setEnabled:(self.hasUsername && self.hasPassword)];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField.tag != 1) {   // not last text field: jump to next text field
-        FormFieldCell* nextCell = (FormFieldCell*)[self.logInTableView cellForRowAtIndexPath:
+        FormFieldCell* nextCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:textField.tag + 1 inSection:0]];
         [nextCell.textField becomeFirstResponder];
     }
     else {   // last text field: resign first responder
         if (textField.text.length != 0) {
             [textField resignFirstResponder];
-            [self logInPressed:self.logInButton];
+            [self submitPressed:self.submitButton];
         }
     }
     
@@ -124,18 +149,26 @@
 }
 
 
-#pragma mark - Log In
+#pragma mark - Submit
 
-- (IBAction)logInPressed:(id)sender
+- (IBAction)submitPressed:(id)sender
 {
-    FormFieldCell* usernameCell = (FormFieldCell*)[self.logInTableView cellForRowAtIndexPath:
+    FormFieldCell* usernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:0 inSection:0]];
     NSString* username = usernameCell.textField.text;
-    FormFieldCell* passwordCell = (FormFieldCell*)[self.logInTableView cellForRowAtIndexPath:
+    FormFieldCell* passwordCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:1 inSection:0]];
     NSString* password = passwordCell.textField.text;
     
-    NSLog(@"Username: %@ Password: %@", username, password);
+    NSLog(@"%@: Username: %@ Password: %@", self.state == logIn ? @"Log in" : @"Sign up", username, password);
+}
+
+
+#pragma mark - Forgot Password
+
+- (IBAction)forgotPasswordPressed:(id)sender
+{
+    NSLog(@"Forgot Password");
 }
 
 
