@@ -48,6 +48,20 @@
 		319EFB5E1A9047AC008B7F2B /* BEMPermanentPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 319EFB591A9047AC008B7F2B /* BEMPermanentPopupView.m */; };
 		319EFB5F1A9047AC008B7F2B /* BEMSimpleLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 319EFB5B1A9047AC008B7F2B /* BEMSimpleLineGraphView.m */; };
 		319EFB621A904927008B7F2B /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 319EFB611A904927008B7F2B /* LogInViewController.m */; };
+		319EFB661A9075F1008B7F2B /* Bmob_iOS_SDK更新历史.txt in Resources */ = {isa = PBXBuildFile; fileRef = 319EFB641A9075F1008B7F2B /* Bmob_iOS_SDK更新历史.txt */; };
+		319EFB671A9075F1008B7F2B /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB651A9075F1008B7F2B /* BmobSDK.framework */; };
+		319EFB811A9076B6008B7F2B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB681A907615008B7F2B /* CoreLocation.framework */; };
+		319EFB821A9076BF008B7F2B /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB6A1A90761E008B7F2B /* Security.framework */; };
+		319EFB831A9076C6008B7F2B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB6C1A907625008B7F2B /* CoreGraphics.framework */; };
+		319EFB841A9076CC008B7F2B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB6E1A90762E008B7F2B /* MobileCoreServices.framework */; };
+		319EFB851A9076D1008B7F2B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB701A907633008B7F2B /* CFNetwork.framework */; };
+		319EFB861A90770E008B7F2B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB721A90763A008B7F2B /* CoreTelephony.framework */; };
+		319EFB871A907714008B7F2B /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB741A907640008B7F2B /* SystemConfiguration.framework */; };
+		319EFB881A907719008B7F2B /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB761A907648008B7F2B /* libz.1.2.5.dylib */; };
+		319EFB891A90771E008B7F2B /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB781A907650008B7F2B /* libicucore.dylib */; };
+		319EFB8A1A907724008B7F2B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB7A1A90765C008B7F2B /* libsqlite3.dylib */; };
+		319EFB8B1A907729008B7F2B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB7C1A907663008B7F2B /* AVFoundation.framework */; };
+		319EFB8C1A90772E008B7F2B /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 319EFB7E1A907669008B7F2B /* MediaPlayer.framework */; };
 		4DDEEB351A8E442A00831652 /* ReportViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDEEB341A8E442A00831652 /* ReportViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +133,20 @@
 		319EFB5B1A9047AC008B7F2B /* BEMSimpleLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BEMSimpleLineGraphView.m; sourceTree = "<group>"; };
 		319EFB601A904927008B7F2B /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
 		319EFB611A904927008B7F2B /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
+		319EFB641A9075F1008B7F2B /* Bmob_iOS_SDK更新历史.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bmob_iOS_SDK更新历史.txt"; sourceTree = "<group>"; };
+		319EFB651A9075F1008B7F2B /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
+		319EFB681A907615008B7F2B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		319EFB6A1A90761E008B7F2B /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		319EFB6C1A907625008B7F2B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		319EFB6E1A90762E008B7F2B /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		319EFB701A907633008B7F2B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		319EFB721A90763A008B7F2B /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		319EFB741A907640008B7F2B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		319EFB761A907648008B7F2B /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		319EFB781A907650008B7F2B /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		319EFB7A1A90765C008B7F2B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		319EFB7C1A907663008B7F2B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		319EFB7E1A907669008B7F2B /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		4DDEEB331A8E442A00831652 /* ReportViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReportViewController.h; sourceTree = "<group>"; };
 		4DDEEB341A8E442A00831652 /* ReportViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReportViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -128,6 +156,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				319EFB8C1A90772E008B7F2B /* MediaPlayer.framework in Frameworks */,
+				319EFB8B1A907729008B7F2B /* AVFoundation.framework in Frameworks */,
+				319EFB8A1A907724008B7F2B /* libsqlite3.dylib in Frameworks */,
+				319EFB891A90771E008B7F2B /* libicucore.dylib in Frameworks */,
+				319EFB881A907719008B7F2B /* libz.1.2.5.dylib in Frameworks */,
+				319EFB871A907714008B7F2B /* SystemConfiguration.framework in Frameworks */,
+				319EFB861A90770E008B7F2B /* CoreTelephony.framework in Frameworks */,
+				319EFB851A9076D1008B7F2B /* CFNetwork.framework in Frameworks */,
+				319EFB841A9076CC008B7F2B /* MobileCoreServices.framework in Frameworks */,
+				319EFB831A9076C6008B7F2B /* CoreGraphics.framework in Frameworks */,
+				319EFB821A9076BF008B7F2B /* Security.framework in Frameworks */,
+				319EFB811A9076B6008B7F2B /* CoreLocation.framework in Frameworks */,
+				319EFB671A9075F1008B7F2B /* BmobSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				315EC6AF1A8B3F95003D466D /* Gifted Kids Parent */,
+				319EFB801A90767D008B7F2B /* Framework */,
 				315EC6CC1A8B3F96003D466D /* Gifted Kids ParentTests */,
 				315EC6AE1A8B3F95003D466D /* Products */,
 			);
@@ -164,6 +206,7 @@
 			children = (
 				315EC6BD1A8B3F96003D466D /* Main.storyboard */,
 				315EC6B71A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld */,
+				319EFB631A9075F1008B7F2B /* Bmob_SDK_iOS_v1.5.2 */,
 				319BF1E31A8DE773007BAF77 /* SWRevealViewController */,
 				319EFB531A9047AC008B7F2B /* BEMSimpleLineGraph */,
 				315EC6B41A8B3F96003D466D /* AppDelegate.h */,
@@ -268,6 +311,34 @@
 				319EFB5B1A9047AC008B7F2B /* BEMSimpleLineGraphView.m */,
 			);
 			path = BEMSimpleLineGraph;
+			sourceTree = "<group>";
+		};
+		319EFB631A9075F1008B7F2B /* Bmob_SDK_iOS_v1.5.2 */ = {
+			isa = PBXGroup;
+			children = (
+				319EFB641A9075F1008B7F2B /* Bmob_iOS_SDK更新历史.txt */,
+				319EFB651A9075F1008B7F2B /* BmobSDK.framework */,
+			);
+			path = Bmob_SDK_iOS_v1.5.2;
+			sourceTree = "<group>";
+		};
+		319EFB801A90767D008B7F2B /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				319EFB7E1A907669008B7F2B /* MediaPlayer.framework */,
+				319EFB7C1A907663008B7F2B /* AVFoundation.framework */,
+				319EFB7A1A90765C008B7F2B /* libsqlite3.dylib */,
+				319EFB781A907650008B7F2B /* libicucore.dylib */,
+				319EFB761A907648008B7F2B /* libz.1.2.5.dylib */,
+				319EFB741A907640008B7F2B /* SystemConfiguration.framework */,
+				319EFB721A90763A008B7F2B /* CoreTelephony.framework */,
+				319EFB701A907633008B7F2B /* CFNetwork.framework */,
+				319EFB6E1A90762E008B7F2B /* MobileCoreServices.framework */,
+				319EFB6C1A907625008B7F2B /* CoreGraphics.framework */,
+				319EFB6A1A90761E008B7F2B /* Security.framework */,
+				319EFB681A907615008B7F2B /* CoreLocation.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +448,7 @@
 				315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */,
 				315EC6F11A8B3FCB003D466D /* Alarm_small_11222.png in Resources */,
 				315EC6EF1A8B3FCB003D466D /* Achievement_55588.png in Resources */,
+				319EFB661A9075F1008B7F2B /* Bmob_iOS_SDK更新历史.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +619,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+				);
 				INFOPLIST_FILE = "Gifted Kids Parent/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -559,6 +637,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+				);
 				INFOPLIST_FILE = "Gifted Kids Parent/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
