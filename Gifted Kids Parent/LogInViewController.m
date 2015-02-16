@@ -186,8 +186,6 @@ typedef enum{logIn = 0, signUp} State;
         default:
             break;
     }
-    
-    NSLog(@"%@: Username: %@ Password: %@", self.state == logIn ? @"Log in" : @"Sign up", username, password);
 }
 
 - (void)logInWithUsername:(NSString*)username andPassword:(NSString*)password
@@ -198,33 +196,35 @@ typedef enum{logIn = 0, signUp} State;
             
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            [[NSUserDefaults standardUserDefaults] setObject:user.objectId forKey:@"userID"];
             
             // Return to Home
             [self showHome];
         }
         else {
-            NSLog(@"ERROR: Can't log in\n%@", error.description);
+            NSLog(@"ERROR: Can't log in for username %@ and password %@\n%@", username, password, error.description);
         }
     }];
 }
 
 - (void)signUpWithUsername:(NSString*)username andPassword:(NSString*)password
 {
-    BmobUser *bUser = [[BmobUser alloc] init];
-    [bUser setUserName:username];
-    [bUser setPassword:password];
-    [bUser signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
+    BmobUser *user = [[BmobUser alloc] init];
+    [user setUserName:username];
+    [user setPassword:password];
+    [user signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
         if (isSuccessful) {
-            NSLog(@"Signed up for user %@ password %@", username, password);
+            NSLog(@"Signed up for user %@ and password %@: id %@", username, password, user.objectId);
             
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+            [[NSUserDefaults standardUserDefaults] setObject:user.objectId forKey:@"userID"];
             
             // Return to Home
             [self showHome];
         }
         else {
-            NSLog(@"ERROR: Can't sign up\n%@", error.description);
+            NSLog(@"ERROR: Can't sign up for username %@ and password %@\n%@", username, password, error.description);
         }
     }];
 }
