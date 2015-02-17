@@ -9,9 +9,13 @@
 #import "AppDelegate.h"
 #import <BmobSDK/Bmob.h>
 
+#import "StudentLearnedWord+Add.h"
+
+
 @interface AppDelegate ()
 
 @end
+
 
 @implementation AppDelegate
 
@@ -19,7 +23,45 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [Bmob registerWithAppKey:@"fa90d174e686f8e6cffeabeff62de5b6"];   // Application ID for Gifted Kids
+    
+    // Sync with Bmob database
+    [self syncWithBmob];
+    
     return YES;
+}
+
+- (void)syncWithBmob
+{
+    // Sync StudentLearnedWord
+    BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];   // TEST; should change range to only new data
+    [query_studentLearnedWord setLimit:500];
+    [query_studentLearnedWord findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
+        if (! error) {
+            NSLog(@"SUCCESS: Fetched all StudentLearnedWord; count: %ld", match.count);
+            
+            for (BmobObject* obj in match) {
+                [StudentLearnedWord studentLearnedWordForStudent:[obj objectForKey:@"studentUsername"]
+                                                          onDate:[obj objectForKey:@"date"]
+                                                    withNewWords:[obj objectForKey:@"dailyNewWords"]
+                                                   newWordsCount:[obj objectForKey:@"dailyNewWordsCount"]
+                                                     andAllWords:[obj objectForKey:@"allWords"]
+                                                   allWordsCount:[obj objectForKey:@"allWordsCount"]
+                                          inManagedObjectContext:self.managedObjectContext];
+            }
+            
+            
+            [self.managedObjectContext save:&error];
+            if (! error) {
+                NSLog(@"StudentLearnedWord saved");
+            }
+            else {
+                NSLog(@"ERROR: Error when saving StudentLearnedWord; message: %@", error.description);
+            }
+        }
+        else {
+            NSLog(@"ERROR: Error when fetching StudentLearnedWord; message: %@", error.description);
+        }
+    }];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

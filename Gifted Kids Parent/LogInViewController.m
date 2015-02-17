@@ -50,7 +50,7 @@ typedef enum{logIn = 0, signUp} State;
     [self.submitButton setEnabled:YES];   // TEST PURPOSE
     
     // Set up Log in/Sign up toggle button
-    self.logInSignUpToggleButton.layer.borderWidth = 0.6f;
+    self.logInSignUpToggleButton.layer.borderWidth = 0.8f;
     self.logInSignUpToggleButton.layer.borderColor = [[UIColor whiteColor] CGColor];
     self.logInSignUpToggleButton.layer.cornerRadius = 8.0f;
 }
@@ -93,6 +93,7 @@ typedef enum{logIn = 0, signUp} State;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FormFieldCell *cell = (FormFieldCell*)[tableView dequeueReusableCellWithIdentifier:@"formFieldCell" forIndexPath:indexPath];
     
+    [cell.textField setKeyboardAppearance:UIKeyboardAppearanceDark];
     [cell.textField setDelegate:self];
     [cell.textField addTarget:self
                        action:@selector(textFieldDidChange:)
@@ -197,6 +198,7 @@ typedef enum{logIn = 0, signUp} State;
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
             [[NSUserDefaults standardUserDefaults] setObject:user.objectId forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Return to Home
             [self showHome];
@@ -219,6 +221,7 @@ typedef enum{logIn = 0, signUp} State;
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
             [[NSUserDefaults standardUserDefaults] setObject:user.objectId forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             // Return to Home
             [self showHome];

@@ -61,7 +61,7 @@
     
     
     // Check if logged in
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isLoggedIn"];   // TEST PURPOSE
+//    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isLoggedIn"];   // TEST PURPOSE
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];   // TEST PURPOSE
     if (! [[[NSUserDefaults standardUserDefaults] objectForKey:@"isLoggedIn"] boolValue]) {
         [self performSegueWithIdentifier:@"showLogIn" sender:self];

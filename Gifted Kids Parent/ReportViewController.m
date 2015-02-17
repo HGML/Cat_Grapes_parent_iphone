@@ -6,10 +6,14 @@
 //  Copyright (c) 2015 Yi Li. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ReportViewController.h"
 #import "SWRevealViewController.h"
 
 #import "BEMSimpleLineGraphView.h"
+#import "DateManager.h"
+
+#import "StudentLearnedWord.h"
 
 
 typedef enum{added = 0, total} CountType;
@@ -29,10 +33,23 @@ typedef enum{week = 0, month, year} CountPeriod;
 
 @property (nonatomic) CountPeriod period;
 
+@property (nonatomic, strong) NSArray* currentData;
 
-@property (nonatomic, strong) NSArray* words;
 
-@property (nonatomic, strong) NSArray* allWords;
+@property (nonatomic, strong) NSManagedObjectContext* context;
+
+
+@property (nonatomic, strong) NSArray* weeklyAllWords;
+
+@property (nonatomic, strong) NSArray* monthlyAllWords;
+
+@property (nonatomic, strong) NSArray* yearlyAllWords;
+
+@property (nonatomic, strong) NSArray* weeklyDailyWords;
+
+@property (nonatomic, strong) NSArray* monthlyDailyWords;
+
+@property (nonatomic, strong) NSArray* yearlyDailyWords;
 
 @end
 
@@ -68,57 +85,45 @@ typedef enum{week = 0, month, year} CountPeriod;
                                          action:@selector(countPeriodChanged:)
                                forControlEvents:UIControlEventValueChanged];
     
-    // Load graph data
-    self.allWords = [NSArray arrayWithObjects:@"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", @"238", @"242", @"253", @"260", @"269", @"272", @"282", nil];
-    [self reloadData];
-}
-
-- (void)reloadData
-{
-    switch (self.type) {
-        case added:
-            switch (self.period) {
-                case week:
-                    self.words = [NSArray arrayWithObjects:@"8", @"4", @"11", @"7", @"9", @"3", @"10", nil];
-                    break;
-                    
-                case month:
-                    
-                    break;
-                    
-                case year:
-                    
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-            
-        case total:
-            switch (self.period) {
-                case week:
-                    self.words = [self.allWords subarrayWithRange:NSMakeRange(0, 7)];
-                    break;
-                    
-                case month:
-                    self.words = [self.allWords subarrayWithRange:NSMakeRange(0, 30)];
-                    break;
-                    
-                case year:
-                    self.words = self.allWords;
-                    break;
-                    
-                default:
-                    break;
-            }
-            break;
-            
-        default:
-            break;
-    }
     
-    // Reload graph
+    // Get Managed Object Context
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    
+    
+    // Load Data
+    NSDate* endDate = [DateManager today];
+    NSDate* yearlyStartDate = [DateManager dateDays:-364 afterDate:endDate];
+    NSError* error = nil;
+    
+    
+    // Get total words and daily new words for the past year
+    NSFetchRequest* request_year = [NSFetchRequest fetchRequestWithEntityName:@"StudentLearnedWord"];
+    request_year.predicate = [NSPredicate predicateWithFormat:@"%@ <= date && date <= %@", yearlyStartDate, endDate];
+    request_year.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    request_year.propertiesToFetch = [NSArray arrayWithObjects:@"dailyNewWordsCount", @"allWordsCount", nil];
+    NSArray* match_yearly = [self.context executeFetchRequest:request_year error:&error];
+    
+    // Calculate daily new words and total words for every day in the past year
+    NSMutableArray* dailyTotal = [NSMutableArray array];
+    NSMutableArray* dailyNew = [NSMutableArray array];
+    for (size_t index = 0; index < match_yearly.count; ++index) {
+        StudentLearnedWord* obj = [match_yearly objectAtIndex:index];
+        [dailyTotal addObject:obj.allWordsCount];
+        [dailyNew addObject:obj.dailyNewWordsCount];
+    }
+    self.yearlyAllWords = dailyTotal;
+    self.yearlyDailyWords = dailyNew;
+    
+    // Calculate daily and total words for the past month and the past week
+    self.monthlyAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-30, 30)];
+    self.monthlyDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-30, 30)];
+    self.weeklyAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-7, 7)];
+    self.weeklyDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-7, 7)];
+    
+    
+    // Load Graph
+    self.currentData = self.weeklyDailyWords;
     [self.wordLineGraph reloadGraph];
 }
 
@@ -135,6 +140,55 @@ typedef enum{week = 0, month, year} CountPeriod;
 {
     self.period = (int)control.selectedSegmentIndex;
     [self reloadData];
+}
+
+- (void)reloadData
+{
+    switch (self.type) {
+        case added:
+            switch (self.period) {
+                case week:
+                    self.currentData = self.weeklyDailyWords;
+                    break;
+                    
+                case month:
+                    self.currentData = self.monthlyDailyWords;
+                    break;
+                    
+                case year:
+                    self.currentData = self.yearlyDailyWords;
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        case total:
+            switch (self.period) {
+                case week:
+                    self.currentData = self.weeklyAllWords;
+                    break;
+                    
+                case month:
+                    self.currentData = self.monthlyAllWords;
+                    break;
+                    
+                case year:
+                    self.currentData = self.yearlyAllWords;
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    // Reload graph
+    [self.wordLineGraph reloadGraph];
 }
 
 
@@ -175,11 +229,11 @@ typedef enum{week = 0, month, year} CountPeriod;
 #pragma mark - SimpleLineGraph Data Source
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
-    return (int)[self.words count];
+    return (int)[self.currentData count];
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
-    return [[self.words objectAtIndex:index] floatValue];
+    return [[self.currentData objectAtIndex:index] floatValue];
 }
 
 #pragma mark - SimpleLineGraph Delegate
