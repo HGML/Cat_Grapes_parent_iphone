@@ -1,4 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6254" systemVersion="14C109" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Parent" representedClassName="Parent" syncable="YES">
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Sentence" representedClassName="Sentence" syncable="YES">
+        <attribute name="chinese" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="english" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="isDifficultInExercise" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StudentDidExercise" inverseName="hasDifficultSentences" inverseEntity="StudentDidExercise" syncable="YES"/>
+    </entity>
+    <entity name="StudentDidExercise" representedClassName="StudentDidExercise" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="difficultWords" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="exerciseUid" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="isReview" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="learnedComponents" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="learnedWords" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reviewedComponents" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reviewedWords" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasDifficultSentences" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sentence" inverseName="isDifficultInExercise" inverseEntity="Sentence" syncable="YES"/>
+    </entity>
+    <entity name="StudentLearnedWord" representedClassName="StudentLearnedWord" syncable="YES">
+        <attribute name="allWords" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="allWordsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="dailyNewWords" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dailyNewWordsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="StudentStartedSession" representedClassName="StudentStartedSession" syncable="YES">
+        <attribute name="isOnTime" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="isReminded" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="scheduledTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Parent" positionX="-279" positionY="-18" width="128" height="103"/>
+        <element name="Sentence" positionX="286" positionY="-18" width="128" height="118"/>
+        <element name="StudentDidExercise" positionX="97" positionY="-64" width="128" height="193"/>
+        <element name="StudentStartedSession" positionX="-81" positionY="-19" width="128" height="118"/>
+        <element name="StudentLearnedWord" positionX="97" positionY="173" width="128" height="133"/>
+    </elements>
 </model>
