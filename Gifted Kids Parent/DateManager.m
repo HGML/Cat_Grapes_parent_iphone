@@ -24,6 +24,8 @@
     [formatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"HKT"]];
 //    [formatter setTimeZone:[NSTimeZone timeZoneWithName:@"Asia/Shanghai"]];
     NSString* todayString = [formatter stringFromDate:[NSDate date]];
+    todayString = [todayString stringByAppendingString:@" 00:00:00"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     return [formatter dateFromString:todayString];
 }
 

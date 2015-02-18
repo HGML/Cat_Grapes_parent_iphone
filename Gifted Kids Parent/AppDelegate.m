@@ -32,12 +32,33 @@
 
 - (void)syncWithBmob
 {
+    [self syncStudentLearnedWord];
+}
+
+- (void)syncStudentLearnedWord
+{
     // Sync StudentLearnedWord
+    NSError* error = nil;
+    NSFetchRequest* request_lastLearnedWord = [NSFetchRequest fetchRequestWithEntityName:@"StudentLearnedWord"];
+    request_lastLearnedWord.propertiesToFetch = [NSArray arrayWithObject:@"date"];
+    request_lastLearnedWord.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    NSArray* allSlws = [self.managedObjectContext executeFetchRequest:request_lastLearnedWord error:&error];
+    NSDate* lastDate = allSlws.count ? ((StudentLearnedWord*)allSlws.lastObject).date : nil;
+    
     BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];   // TEST; should change range to only new data
+    [query_studentLearnedWord whereKey:@"username" equalTo:[[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"]];
+    if (lastDate) {
+        [query_studentLearnedWord whereKey:@"date" greaterThan:lastDate];
+    }
     [query_studentLearnedWord setLimit:500];
     [query_studentLearnedWord findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
         if (! error) {
-            NSLog(@"SUCCESS: Fetched all StudentLearnedWord; count: %ld", match.count);
+            if (! match.count) {
+                NSLog(@"No new StudentLearnedWord to be fetched");
+                return;
+            }
+            
+            NSLog(@"SUCCESS: Fetched %ld new StudentLearnedWord", match.count);
             
             for (BmobObject* obj in match) {
                 [StudentLearnedWord studentLearnedWordForStudent:[obj objectForKey:@"studentUsername"]

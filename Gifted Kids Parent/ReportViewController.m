@@ -92,14 +92,13 @@ typedef enum{week = 0, month, year} CountPeriod;
     
     
     // Load Data
-    NSDate* endDate = [DateManager today];
-    NSDate* yearlyStartDate = [DateManager dateDays:-365 afterDate:endDate];
+    NSDate* yearlyStartDate = [DateManager dateDays:-364 afterDate:[DateManager today]];
     NSError* error = nil;
     
     
     // Get total words and daily new words for the past year
     NSFetchRequest* request_year = [NSFetchRequest fetchRequestWithEntityName:@"StudentLearnedWord"];
-    request_year.predicate = [NSPredicate predicateWithFormat:@"%@ <= date && date <= %@", yearlyStartDate, endDate];
+    request_year.predicate = [NSPredicate predicateWithFormat:@"date >= %@", yearlyStartDate];
     request_year.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
     request_year.propertiesToFetch = [NSArray arrayWithObjects:@"dailyNewWordsCount", @"allWordsCount", nil];
     NSArray* match_yearly = [self.context executeFetchRequest:request_year error:&error];
