@@ -39,17 +39,17 @@ typedef enum{week = 0, month, year} CountPeriod;
 @property (nonatomic, strong) NSManagedObjectContext* context;
 
 
-@property (nonatomic, strong) NSArray* weeklyAllWords;
+@property (nonatomic, strong) NSArray* weekAllWords;
 
-@property (nonatomic, strong) NSArray* monthlyAllWords;
+@property (nonatomic, strong) NSArray* monthAllWords;
 
-@property (nonatomic, strong) NSArray* yearlyAllWords;
+@property (nonatomic, strong) NSArray* yearAllWords;
 
-@property (nonatomic, strong) NSArray* weeklyDailyWords;
+@property (nonatomic, strong) NSArray* weekDailyWords;
 
-@property (nonatomic, strong) NSArray* monthlyDailyWords;
+@property (nonatomic, strong) NSArray* monthDailyWords;
 
-@property (nonatomic, strong) NSArray* yearlyDailyWords;
+@property (nonatomic, strong) NSArray* yearWeeklyWords;
 
 @end
 
@@ -93,7 +93,7 @@ typedef enum{week = 0, month, year} CountPeriod;
     
     // Load Data
     NSDate* endDate = [DateManager today];
-    NSDate* yearlyStartDate = [DateManager dateDays:-364 afterDate:endDate];
+    NSDate* yearlyStartDate = [DateManager dateDays:-365 afterDate:endDate];
     NSError* error = nil;
     
     
@@ -112,18 +112,34 @@ typedef enum{week = 0, month, year} CountPeriod;
         [dailyTotal addObject:obj.allWordsCount];
         [dailyNew addObject:obj.dailyNewWordsCount];
     }
-    self.yearlyAllWords = dailyTotal;
-    self.yearlyDailyWords = dailyNew;
     
-    // Calculate daily and total words for the past month and the past week
-    self.monthlyAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-30, 30)];
-    self.monthlyDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-30, 30)];
-    self.weeklyAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-7, 7)];
-    self.weeklyDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-7, 7)];
+    // Calculate daily and total words for the past week and the past month
+    self.weekAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-7, 7)];
+    self.weekDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-7, 7)];
+    self.monthAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-30, 30)];
+    self.monthDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-30, 30)];
+    
+    // Calculate weekly total words for every week in the past year
+    NSMutableArray* weeklyTotalWords = [NSMutableArray array];
+    for (size_t index = dailyTotal.count - 7 * 52; index < dailyTotal.count; index += 7) {
+        [weeklyTotalWords addObject:[dailyTotal objectAtIndex:index]];
+    }
+    self.yearAllWords = weeklyTotalWords;
+    
+    // Calculate weekly new words for every week in the past year
+    NSMutableArray* weeklyNewWords = [NSMutableArray array];
+    for (size_t index = dailyNew.count - 7 * 52; index < dailyNew.count; index += 7) {
+        size_t sum = 0;
+        for (size_t day = 0; day < 7; ++day) {
+            sum += [[dailyNew objectAtIndex:index + day] integerValue];
+        }
+        [weeklyNewWords addObject:[NSNumber numberWithInteger:sum]];
+    }
+    self.yearWeeklyWords = weeklyNewWords;
     
     
     // Load Graph
-    self.currentData = self.weeklyDailyWords;
+    self.currentData = self.weekDailyWords;
     [self.wordLineGraph reloadGraph];
 }
 
@@ -146,17 +162,18 @@ typedef enum{week = 0, month, year} CountPeriod;
 {
     switch (self.type) {
         case added:
+            self.wordLineGraph.enableBezierCurve = YES;
             switch (self.period) {
                 case week:
-                    self.currentData = self.weeklyDailyWords;
+                    self.currentData = self.weekDailyWords;
                     break;
                     
                 case month:
-                    self.currentData = self.monthlyDailyWords;
+                    self.currentData = self.monthDailyWords;
                     break;
                     
                 case year:
-                    self.currentData = self.yearlyDailyWords;
+                    self.currentData = self.yearWeeklyWords;
                     break;
                     
                 default:
@@ -165,17 +182,18 @@ typedef enum{week = 0, month, year} CountPeriod;
             break;
             
         case total:
+            self.wordLineGraph.enableBezierCurve = NO;
             switch (self.period) {
                 case week:
-                    self.currentData = self.weeklyAllWords;
+                    self.currentData = self.weekAllWords;
                     break;
                     
                 case month:
-                    self.currentData = self.monthlyAllWords;
+                    self.currentData = self.monthAllWords;
                     break;
                     
                 case year:
-                    self.currentData = self.yearlyAllWords;
+                    self.currentData = self.yearAllWords;
                     break;
                     
                 default:
@@ -229,7 +247,7 @@ typedef enum{week = 0, month, year} CountPeriod;
 #pragma mark - SimpleLineGraph Data Source
 
 - (NSInteger)numberOfPointsInLineGraph:(BEMSimpleLineGraphView *)graph {
-    return (int)[self.currentData count];
+    return self.currentData.count;
 }
 
 - (CGFloat)lineGraph:(BEMSimpleLineGraphView *)graph valueForPointAtIndex:(NSInteger)index {
@@ -239,27 +257,21 @@ typedef enum{week = 0, month, year} CountPeriod;
 #pragma mark - SimpleLineGraph Delegate
 
 - (NSInteger)numberOfGapsBetweenLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph {
-    switch (self.period) {
-        case week:
-            return 1;
-            break;
-            
-        case month:
-            return 5;
-            break;
-            
-        case year:
-            return 30;
-            
-        default:
-            return 0;
-            break;
-    }
+    return self.currentData.count / 10;
 }
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
-    NSString *label = [NSString stringWithFormat:@"Day %ld", index + 1];
-    return [label stringByReplacingOccurrencesOfString:@" " withString:@"\n"];
+    if (self.period == year) {
+        return [NSString stringWithFormat:@"Wk\n%ld", index + 1];
+    }
+    else {
+        return [NSString stringWithFormat:@"Day\n%ld", index + 1];
+    }
+}
+
+- (NSInteger)numberOfYAxisLabelsOnLineGraph:(BEMSimpleLineGraphView *)graph
+{
+    return 7;
 }
 
 //- (void)lineGraph:(BEMSimpleLineGraphView *)graph didTouchGraphWithClosestIndex:(NSInteger)index {

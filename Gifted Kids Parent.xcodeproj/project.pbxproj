@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3156E8E21A94793C00281038 /* Bmob_iOS_SDK更新历史.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3156E8E01A94793C00281038 /* Bmob_iOS_SDK更新历史.txt */; };
+		3156E8E31A94793C00281038 /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3156E8E11A94793C00281038 /* BmobSDK.framework */; };
 		315EC6B31A8B3F96003D466D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC6B21A8B3F96003D466D /* main.m */; };
 		315EC6B61A8B3F96003D466D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC6B51A8B3F96003D466D /* AppDelegate.m */; };
 		315EC6B91A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 315EC6B71A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld */; };
@@ -36,12 +38,12 @@
 		315EC7021A8B3FCB003D466D /* Word_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6ED1A8B3FCB003D466D /* Word_62928.png */; };
 		315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */; };
 		315EC7061A8B4091003D466D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC7051A8B4091003D466D /* HomeViewController.m */; };
+		3160E2241A9424C30028D71E /* StudentLearnedComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3160E2231A9424C30028D71E /* StudentLearnedComponent.m */; };
+		3160E2271A9424C30028D71E /* StudentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3160E2261A9424C30028D71E /* StudentInfo.m */; };
 		31669BBE1A92EE9F007C4925 /* Parent.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BBD1A92EE9F007C4925 /* Parent.m */; };
 		31669BC11A92EE9F007C4925 /* StudentDidExercise.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BC01A92EE9F007C4925 /* StudentDidExercise.m */; };
 		31669BC41A92EE9F007C4925 /* Sentence.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BC31A92EE9F007C4925 /* Sentence.m */; };
 		31669BCA1A92EEA0007C4925 /* StudentStartedSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BC91A92EEA0007C4925 /* StudentStartedSession.m */; };
-		31669BCF1A92EF2A007C4925 /* Bmob_iOS_SDK更新历史.txt in Resources */ = {isa = PBXBuildFile; fileRef = 31669BCD1A92EF2A007C4925 /* Bmob_iOS_SDK更新历史.txt */; };
-		31669BD01A92EF2A007C4925 /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31669BCE1A92EF2A007C4925 /* BmobSDK.framework */; };
 		31669BDF1A92F397007C4925 /* DateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BDE1A92F397007C4925 /* DateManager.m */; };
 		31669BE21A92F73E007C4925 /* StudentLearnedWord.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BE11A92F73E007C4925 /* StudentLearnedWord.m */; };
 		31669BE51A931729007C4925 /* StudentLearnedWord+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BE41A931729007C4925 /* StudentLearnedWord+Add.m */; };
@@ -83,6 +85,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3156E8E01A94793C00281038 /* Bmob_iOS_SDK更新历史.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bmob_iOS_SDK更新历史.txt"; sourceTree = "<group>"; };
+		3156E8E11A94793C00281038 /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
 		315EC6AD1A8B3F95003D466D /* Gifted Kids Parent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gifted Kids Parent.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		315EC6B11A8B3F96003D466D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		315EC6B21A8B3F96003D466D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -118,6 +122,10 @@
 		315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Word_small_62928.png; sourceTree = "<group>"; };
 		315EC7041A8B4091003D466D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		315EC7051A8B4091003D466D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		3160E2221A9424C30028D71E /* StudentLearnedComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentLearnedComponent.h; sourceTree = "<group>"; };
+		3160E2231A9424C30028D71E /* StudentLearnedComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentLearnedComponent.m; sourceTree = "<group>"; };
+		3160E2251A9424C30028D71E /* StudentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentInfo.h; sourceTree = "<group>"; };
+		3160E2261A9424C30028D71E /* StudentInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentInfo.m; sourceTree = "<group>"; };
 		31669BBC1A92EE9F007C4925 /* Parent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Parent.h; sourceTree = "<group>"; };
 		31669BBD1A92EE9F007C4925 /* Parent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Parent.m; sourceTree = "<group>"; };
 		31669BBF1A92EE9F007C4925 /* StudentDidExercise.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentDidExercise.h; sourceTree = "<group>"; };
@@ -126,8 +134,6 @@
 		31669BC31A92EE9F007C4925 /* Sentence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sentence.m; sourceTree = "<group>"; };
 		31669BC81A92EEA0007C4925 /* StudentStartedSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentStartedSession.h; sourceTree = "<group>"; };
 		31669BC91A92EEA0007C4925 /* StudentStartedSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentStartedSession.m; sourceTree = "<group>"; };
-		31669BCD1A92EF2A007C4925 /* Bmob_iOS_SDK更新历史.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bmob_iOS_SDK更新历史.txt"; sourceTree = "<group>"; };
-		31669BCE1A92EF2A007C4925 /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
 		31669BDD1A92F397007C4925 /* DateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DateManager.h; sourceTree = "<group>"; };
 		31669BDE1A92F397007C4925 /* DateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DateManager.m; sourceTree = "<group>"; };
 		31669BE01A92F73E007C4925 /* StudentLearnedWord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentLearnedWord.h; sourceTree = "<group>"; };
@@ -183,7 +189,7 @@
 				319EFB891A90771E008B7F2B /* libicucore.dylib in Frameworks */,
 				319EFB881A907719008B7F2B /* libz.1.2.5.dylib in Frameworks */,
 				319EFB871A907714008B7F2B /* SystemConfiguration.framework in Frameworks */,
-				31669BD01A92EF2A007C4925 /* BmobSDK.framework in Frameworks */,
+				3156E8E31A94793C00281038 /* BmobSDK.framework in Frameworks */,
 				319EFB861A90770E008B7F2B /* CoreTelephony.framework in Frameworks */,
 				319EFB851A9076D1008B7F2B /* CFNetwork.framework in Frameworks */,
 				319EFB841A9076CC008B7F2B /* MobileCoreServices.framework in Frameworks */,
@@ -203,6 +209,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3156E8DF1A94793C00281038 /* Bmob_SDK_iOS_v1.5.2 */ = {
+			isa = PBXGroup;
+			children = (
+				3156E8E01A94793C00281038 /* Bmob_iOS_SDK更新历史.txt */,
+				3156E8E11A94793C00281038 /* BmobSDK.framework */,
+			);
+			path = Bmob_SDK_iOS_v1.5.2;
+			sourceTree = "<group>";
+		};
 		315EC6A41A8B3F95003D466D = {
 			isa = PBXGroup;
 			children = (
@@ -227,8 +242,8 @@
 			children = (
 				315EC6BD1A8B3F96003D466D /* Main.storyboard */,
 				315EC6B71A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld */,
-				31669BCC1A92EF2A007C4925 /* Bmob_SDK_iOS_v1.5.2 */,
 				31669BCB1A92EEAA007C4925 /* Core Data */,
+				3156E8DF1A94793C00281038 /* Bmob_SDK_iOS_v1.5.2 */,
 				319BF1E31A8DE773007BAF77 /* SWRevealViewController */,
 				319EFB531A9047AC008B7F2B /* BEMSimpleLineGraph */,
 				31669BDD1A92F397007C4925 /* DateManager.h */,
@@ -318,6 +333,8 @@
 			children = (
 				31669BBC1A92EE9F007C4925 /* Parent.h */,
 				31669BBD1A92EE9F007C4925 /* Parent.m */,
+				3160E2251A9424C30028D71E /* StudentInfo.h */,
+				3160E2261A9424C30028D71E /* StudentInfo.m */,
 				31669BC81A92EEA0007C4925 /* StudentStartedSession.h */,
 				31669BC91A92EEA0007C4925 /* StudentStartedSession.m */,
 				31669BBF1A92EE9F007C4925 /* StudentDidExercise.h */,
@@ -326,19 +343,12 @@
 				31669BE11A92F73E007C4925 /* StudentLearnedWord.m */,
 				31669BE31A931729007C4925 /* StudentLearnedWord+Add.h */,
 				31669BE41A931729007C4925 /* StudentLearnedWord+Add.m */,
+				3160E2221A9424C30028D71E /* StudentLearnedComponent.h */,
+				3160E2231A9424C30028D71E /* StudentLearnedComponent.m */,
 				31669BC21A92EE9F007C4925 /* Sentence.h */,
 				31669BC31A92EE9F007C4925 /* Sentence.m */,
 			);
 			name = "Core Data";
-			sourceTree = "<group>";
-		};
-		31669BCC1A92EF2A007C4925 /* Bmob_SDK_iOS_v1.5.2 */ = {
-			isa = PBXGroup;
-			children = (
-				31669BCD1A92EF2A007C4925 /* Bmob_iOS_SDK更新历史.txt */,
-				31669BCE1A92EF2A007C4925 /* BmobSDK.framework */,
-			);
-			path = Bmob_SDK_iOS_v1.5.2;
 			sourceTree = "<group>";
 		};
 		319BF1E31A8DE773007BAF77 /* SWRevealViewController */ = {
@@ -491,7 +501,7 @@
 				315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */,
 				315EC6F11A8B3FCB003D466D /* Alarm_small_11222.png in Resources */,
 				315EC6EF1A8B3FCB003D466D /* Achievement_55588.png in Resources */,
-				31669BCF1A92EF2A007C4925 /* Bmob_iOS_SDK更新历史.txt in Resources */,
+				3156E8E21A94793C00281038 /* Bmob_iOS_SDK更新历史.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,9 +550,11 @@
 				31669BCA1A92EEA0007C4925 /* StudentStartedSession.m in Sources */,
 				319EFB5D1A9047AC008B7F2B /* BEMLine.m in Sources */,
 				315EC7061A8B4091003D466D /* HomeViewController.m in Sources */,
+				3160E2241A9424C30028D71E /* StudentLearnedComponent.m in Sources */,
 				31669BBE1A92EE9F007C4925 /* Parent.m in Sources */,
 				31669BC41A92EE9F007C4925 /* Sentence.m in Sources */,
 				31669BC11A92EE9F007C4925 /* StudentDidExercise.m in Sources */,
+				3160E2271A9424C30028D71E /* StudentInfo.m in Sources */,
 				319BF1ED1A8DEC6E007BAF77 /* NewsFeedController.m in Sources */,
 				31669BE21A92F73E007C4925 /* StudentLearnedWord.m in Sources */,
 				319BF1E61A8DE773007BAF77 /* SWRevealViewController.m in Sources */,
@@ -689,6 +701,15 @@
 					"$(PROJECT_DIR)/Gifted",
 					Kids,
 					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
 				);
 				INFOPLIST_FILE = "Gifted Kids Parent/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -716,6 +737,15 @@
 					"$(PROJECT_DIR)/Gifted",
 					Kids,
 					Parent,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
 					"$(PROJECT_DIR)/Gifted",
 					Kids,
 					Parent/Bmob_SDK_iOS_v1.5.2,
