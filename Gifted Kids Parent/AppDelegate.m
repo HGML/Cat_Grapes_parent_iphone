@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import <BmobSDK/Bmob.h>
 
+#import "DateManager.h"
+
 #import "StudentLearnedWord+Add.h"
 
 
@@ -33,23 +35,18 @@
 - (void)syncWithBmob
 {
     [self syncStudentLearnedWord];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"lastSyncDate"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)syncStudentLearnedWord
 {
     // Sync StudentLearnedWord
-    NSError* error = nil;
-    NSFetchRequest* request_lastLearnedWord = [NSFetchRequest fetchRequestWithEntityName:@"StudentLearnedWord"];
-    request_lastLearnedWord.propertiesToFetch = [NSArray arrayWithObject:@"date"];
-    request_lastLearnedWord.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
-    NSArray* allSlws = [self.managedObjectContext executeFetchRequest:request_lastLearnedWord error:&error];
-    NSDate* lastDate = allSlws.count ? ((StudentLearnedWord*)allSlws.lastObject).date : nil;
-    
-    BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];   // TEST; should change range to only new data
+    BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];
     [query_studentLearnedWord whereKey:@"username" equalTo:[[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"]];
-    if (lastDate) {
-        [query_studentLearnedWord whereKey:@"date" greaterThan:lastDate];
-    }
+    [query_studentLearnedWord whereKey:@"date"
+                   greaterThanOrEqualTo:[[NSUserDefaults standardUserDefaults] objectForKey:@"lastSyncDate"]];
     [query_studentLearnedWord setLimit:500];
     [query_studentLearnedWord findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
         if (! error) {
