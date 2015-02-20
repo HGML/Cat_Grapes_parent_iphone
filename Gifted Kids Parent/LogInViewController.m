@@ -10,7 +10,8 @@
 #import "FormFieldCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-#import <BmobSDK/Bmob.h>
+//#import <BmobSDK/Bmob.h>
+#import "ParentUser.h"
 
 
 typedef enum{logIn = 0, signUp} State;
@@ -191,14 +192,20 @@ typedef enum{logIn = 0, signUp} State;
 
 - (void)logInWithUsername:(NSString*)username andPassword:(NSString*)password
 {
-    [BmobUser loginWithUsernameInBackground:username password:password block:^(BmobUser* user, NSError* error){
+    [ParentUser loginWithUsernameInBackground:username password:password block:^(BmobUser* user, NSError* error){
         if (! error) {
-            NSLog(@"Logged in for user %@ password %@", username, password);
+            NSLog(@"Logged in for parent user %@ password %@", username, password);
             
+            ParentUser* parent = (ParentUser*)user;
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
-            [[NSUserDefaults standardUserDefaults] setObject:user.objectId forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] setObject:parent.objectId forKey:@"userID"];
+//            [[NSUserDefaults standardUserDefaults] setObject:parent.studentUsername forKey:@"studentUsername"];
+            [[NSUserDefaults standardUserDefaults] setObject:@"HGMLee" forKey:@"studentUsername"];   // TEST
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            // Post User Logged In notification
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
             
             // Return to Home
             [self showHome];
@@ -211,17 +218,23 @@ typedef enum{logIn = 0, signUp} State;
 
 - (void)signUpWithUsername:(NSString*)username andPassword:(NSString*)password
 {
-    BmobUser *user = [[BmobUser alloc] init];
-    [user setUserName:username];
-    [user setPassword:password];
-    [user signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
+    ParentUser *parent = [[ParentUser alloc] init];
+    [parent setUserName:username];
+    [parent setPassword:password];
+    [parent setStudentUsername:@"HGMLee"];   // TEST; should ask for user input
+    [parent signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
         if (isSuccessful) {
-            NSLog(@"Signed up for user %@ and password %@: id %@", username, password, user.objectId);
+            NSLog(@"Signed up for parent user %@ and password %@: id %@", username, password, parent.objectId);
+            NSLog(@"Student: %@", parent.studentUsername);
             
             [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
-            [[NSUserDefaults standardUserDefaults] setObject:user.objectId forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] setObject:parent.objectId forKey:@"userID"];
+            [[NSUserDefaults standardUserDefaults] setObject:parent.studentUsername forKey:@"studentUsername"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            // Post User Logged In notification
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
             
             // Return to Home
             [self showHome];
@@ -231,6 +244,9 @@ typedef enum{logIn = 0, signUp} State;
         }
     }];
 }
+
+
+#pragma mark - Return to Home Screen
 
 - (void)showHome
 {

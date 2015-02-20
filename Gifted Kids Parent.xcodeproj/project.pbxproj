@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3145D0EA1A949A5000DD17AF /* Bmob_iOS_SDK更新历史.txt in Resources */ = {isa = PBXBuildFile; fileRef = 3145D0E81A949A5000DD17AF /* Bmob_iOS_SDK更新历史.txt */; };
-		3145D0EB1A949A5000DD17AF /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3145D0E91A949A5000DD17AF /* BmobSDK.framework */; };
+		3145D0EE1A94DCF000DD17AF /* ParentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3145D0ED1A94DCF000DD17AF /* ParentUser.m */; };
 		3156E8E61A94829600281038 /* StudentLearnedComponent+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 3156E8E51A94829600281038 /* StudentLearnedComponent+Add.m */; };
 		3156E8E91A9484B600281038 /* StudentInfo+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = 3156E8E81A9484B600281038 /* StudentInfo+Add.m */; };
 		315EC6B31A8B3F96003D466D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC6B21A8B3F96003D466D /* main.m */; };
@@ -40,6 +39,8 @@
 		315EC7021A8B3FCB003D466D /* Word_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6ED1A8B3FCB003D466D /* Word_62928.png */; };
 		315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */ = {isa = PBXBuildFile; fileRef = 315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */; };
 		315EC7061A8B4091003D466D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 315EC7051A8B4091003D466D /* HomeViewController.m */; };
+		315F6F411A96DEC800F4D439 /* Bmob_iOS_SDK更新历史.txt in Resources */ = {isa = PBXBuildFile; fileRef = 315F6F3F1A96DEC800F4D439 /* Bmob_iOS_SDK更新历史.txt */; };
+		315F6F421A96DEC800F4D439 /* BmobSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 315F6F401A96DEC800F4D439 /* BmobSDK.framework */; };
 		3160E2241A9424C30028D71E /* StudentLearnedComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3160E2231A9424C30028D71E /* StudentLearnedComponent.m */; };
 		3160E2271A9424C30028D71E /* StudentInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 3160E2261A9424C30028D71E /* StudentInfo.m */; };
 		31669BBE1A92EE9F007C4925 /* Parent.m in Sources */ = {isa = PBXBuildFile; fileRef = 31669BBD1A92EE9F007C4925 /* Parent.m */; };
@@ -87,8 +88,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3145D0E81A949A5000DD17AF /* Bmob_iOS_SDK更新历史.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bmob_iOS_SDK更新历史.txt"; sourceTree = "<group>"; };
-		3145D0E91A949A5000DD17AF /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
+		3145D0EC1A94DCF000DD17AF /* ParentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParentUser.h; sourceTree = "<group>"; };
+		3145D0ED1A94DCF000DD17AF /* ParentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParentUser.m; sourceTree = "<group>"; };
 		3156E8E41A94829600281038 /* StudentLearnedComponent+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StudentLearnedComponent+Add.h"; sourceTree = "<group>"; };
 		3156E8E51A94829600281038 /* StudentLearnedComponent+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "StudentLearnedComponent+Add.m"; sourceTree = "<group>"; };
 		3156E8E71A9484B600281038 /* StudentInfo+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "StudentInfo+Add.h"; sourceTree = "<group>"; };
@@ -128,6 +129,8 @@
 		315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Word_small_62928.png; sourceTree = "<group>"; };
 		315EC7041A8B4091003D466D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		315EC7051A8B4091003D466D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		315F6F3F1A96DEC800F4D439 /* Bmob_iOS_SDK更新历史.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Bmob_iOS_SDK更新历史.txt"; sourceTree = "<group>"; };
+		315F6F401A96DEC800F4D439 /* BmobSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BmobSDK.framework; sourceTree = "<group>"; };
 		3160E2221A9424C30028D71E /* StudentLearnedComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentLearnedComponent.h; sourceTree = "<group>"; };
 		3160E2231A9424C30028D71E /* StudentLearnedComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StudentLearnedComponent.m; sourceTree = "<group>"; };
 		3160E2251A9424C30028D71E /* StudentInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentInfo.h; sourceTree = "<group>"; };
@@ -195,7 +198,7 @@
 				319EFB891A90771E008B7F2B /* libicucore.dylib in Frameworks */,
 				319EFB881A907719008B7F2B /* libz.1.2.5.dylib in Frameworks */,
 				319EFB871A907714008B7F2B /* SystemConfiguration.framework in Frameworks */,
-				3145D0EB1A949A5000DD17AF /* BmobSDK.framework in Frameworks */,
+				315F6F421A96DEC800F4D439 /* BmobSDK.framework in Frameworks */,
 				319EFB861A90770E008B7F2B /* CoreTelephony.framework in Frameworks */,
 				319EFB851A9076D1008B7F2B /* CFNetwork.framework in Frameworks */,
 				319EFB841A9076CC008B7F2B /* MobileCoreServices.framework in Frameworks */,
@@ -215,15 +218,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3145D0E71A949A5000DD17AF /* Bmob_SDK_iOS_v1.5.2 */ = {
-			isa = PBXGroup;
-			children = (
-				3145D0E81A949A5000DD17AF /* Bmob_iOS_SDK更新历史.txt */,
-				3145D0E91A949A5000DD17AF /* BmobSDK.framework */,
-			);
-			path = Bmob_SDK_iOS_v1.5.2;
-			sourceTree = "<group>";
-		};
 		315EC6A41A8B3F95003D466D = {
 			isa = PBXGroup;
 			children = (
@@ -246,7 +240,7 @@
 		315EC6AF1A8B3F95003D466D /* Gifted Kids Parent */ = {
 			isa = PBXGroup;
 			children = (
-				3145D0E71A949A5000DD17AF /* Bmob_SDK_iOS_v1.5.2 */,
+				315F6F3E1A96DEC800F4D439 /* Bmob_SDK_iOS_v1.5.2 */,
 				319BF1E31A8DE773007BAF77 /* SWRevealViewController */,
 				319EFB531A9047AC008B7F2B /* BEMSimpleLineGraph */,
 				315EC6BD1A8B3F96003D466D /* Main.storyboard */,
@@ -254,6 +248,8 @@
 				31669BCB1A92EEAA007C4925 /* Core Data */,
 				31669BDD1A92F397007C4925 /* DateManager.h */,
 				31669BDE1A92F397007C4925 /* DateManager.m */,
+				3145D0EC1A94DCF000DD17AF /* ParentUser.h */,
+				3145D0ED1A94DCF000DD17AF /* ParentUser.m */,
 				315EC6B41A8B3F96003D466D /* AppDelegate.h */,
 				315EC6B51A8B3F96003D466D /* AppDelegate.m */,
 				319BF1CA1A8DC415007BAF77 /* ImageTextCell.h */,
@@ -332,6 +328,15 @@
 				315EC6EE1A8B3FCB003D466D /* Word_small_62928.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		315F6F3E1A96DEC800F4D439 /* Bmob_SDK_iOS_v1.5.2 */ = {
+			isa = PBXGroup;
+			children = (
+				315F6F3F1A96DEC800F4D439 /* Bmob_iOS_SDK更新历史.txt */,
+				315F6F401A96DEC800F4D439 /* BmobSDK.framework */,
+			);
+			path = Bmob_SDK_iOS_v1.5.2;
 			sourceTree = "<group>";
 		};
 		31669BCB1A92EEAA007C4925 /* Core Data */ = {
@@ -511,7 +516,7 @@
 				315EC7031A8B3FCB003D466D /* Word_small_62928.png in Resources */,
 				315EC6F11A8B3FCB003D466D /* Alarm_small_11222.png in Resources */,
 				315EC6EF1A8B3FCB003D466D /* Achievement_55588.png in Resources */,
-				3145D0EA1A949A5000DD17AF /* Bmob_iOS_SDK更新历史.txt in Resources */,
+				315F6F411A96DEC800F4D439 /* Bmob_iOS_SDK更新历史.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				319EFB5F1A9047AC008B7F2B /* BEMSimpleLineGraphView.m in Sources */,
+				3145D0EE1A94DCF000DD17AF /* ParentUser.m in Sources */,
 				315EC6B91A8B3F96003D466D /* Gifted_Kids_Parent.xcdatamodeld in Sources */,
 				319EFB621A904927008B7F2B /* LogInViewController.m in Sources */,
 				319EFB5E1A9047AC008B7F2B /* BEMPermanentPopupView.m in Sources */,
@@ -725,6 +731,18 @@
 					"$(PROJECT_DIR)/Gifted",
 					Kids,
 					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_ios_feedback_demo/Feedback,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_ios_feedback_demo/ReadFeedback,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
 				);
 				INFOPLIST_FILE = "Gifted Kids Parent/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -764,6 +782,18 @@
 					"$(PROJECT_DIR)/Gifted",
 					Kids,
 					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_SDK_iOS_v1.5.2,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_ios_feedback_demo/Feedback,
+					"$(PROJECT_DIR)/Gifted",
+					Kids,
+					Parent/Bmob_ios_feedback_demo/ReadFeedback,
 					"$(PROJECT_DIR)/Gifted",
 					Kids,
 					Parent/Bmob_SDK_iOS_v1.5.2,

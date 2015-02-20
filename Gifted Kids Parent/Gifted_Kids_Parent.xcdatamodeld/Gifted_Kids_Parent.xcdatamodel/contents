@@ -25,6 +25,20 @@
         <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hasDifficultSentences" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Sentence" inverseName="isDifficultInExercise" inverseEntity="Sentence" syncable="YES"/>
     </entity>
+    <entity name="StudentInfo" representedClassName="StudentInfo" syncable="YES">
+        <attribute name="consecutiveActiveDays" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="lastActiveDay" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalActiveDays" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="StudentLearnedComponent" representedClassName="StudentLearnedComponent" syncable="YES">
+        <attribute name="allComponents" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="allComponentsCount" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="dailyNewComponents" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dailyNewComponentsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="studentUsername" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="StudentLearnedWord" representedClassName="StudentLearnedWord" syncable="YES">
         <attribute name="allWords" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="allWordsCount" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -44,7 +58,9 @@
         <element name="Parent" positionX="-279" positionY="-18" width="128" height="103"/>
         <element name="Sentence" positionX="286" positionY="-18" width="128" height="118"/>
         <element name="StudentDidExercise" positionX="97" positionY="-64" width="128" height="193"/>
-        <element name="StudentStartedSession" positionX="-81" positionY="-19" width="128" height="118"/>
         <element name="StudentLearnedWord" positionX="97" positionY="173" width="128" height="133"/>
+        <element name="StudentStartedSession" positionX="-81" positionY="-19" width="128" height="118"/>
+        <element name="StudentInfo" positionX="0" positionY="99" width="128" height="105"/>
+        <element name="StudentLearnedComponent" positionX="9" positionY="108" width="128" height="135"/>
     </elements>
 </model>

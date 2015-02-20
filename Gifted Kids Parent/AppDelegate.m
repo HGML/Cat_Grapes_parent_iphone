@@ -11,6 +11,7 @@
 
 #import "DateManager.h"
 
+#import "StudentInfo+Add.h"
 #import "StudentLearnedWord+Add.h"
 
 
@@ -27,26 +28,82 @@
     [Bmob registerWithAppKey:@"fa90d174e686f8e6cffeabeff62de5b6"];   // Application ID for Gifted Kids
     
     // Sync with Bmob database
-    [self syncWithBmob];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isLoggedIn"]) {
+        [self syncWithBmob];
+    }
+    
+    // Sign up for User Logged In notification
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(isLoggedIn:)
+                                                 name:@"UserLoggedIn"
+                                               object:nil];
     
     return YES;
+}
+
+- (void)isLoggedIn:(NSNotification*)notification
+{
+    [self syncWithBmob];
 }
 
 - (void)syncWithBmob
 {
     [self syncStudentLearnedWord];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"lastSyncDate"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self syncStudentInfo];
+}
+
+- (void)syncStudentInfo
+{
+    BmobQuery* query_studentInfo = [BmobQuery queryWithClassName:@"StudentInfo"];
+    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
+    [query_studentInfo whereKey:@"username" equalTo:studentUsername];
+    [query_studentInfo findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
+        if (! error) {
+            if (! match.count) {
+                NSLog(@"ERROR: Can't find StudentInfo with student username %@", studentUsername);
+                return;
+            }
+            
+            NSLog(@"SUCCESS: Fetched StudentInfo");
+            
+            BmobObject* info = [match lastObject];
+            StudentInfo* studentInfo = [StudentInfo studentInfoForStudent:studentUsername
+                                                      withTotalActiveDays:[info objectForKey:@"totalActiveDays"]
+                                                    consecutiveActiveDays:[info objectForKey:@"consecutiveActiveDays"]
+                                                         andLastActiveDay:[info objectForKey:@"lastActiveDay"]
+                                                   inManagedObjectContext:self.managedObjectContext];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.totalActiveDays forKey:@"totalActiveDays"];
+            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.consecutiveActiveDays forKey:@"consecutiveActiveDays"];
+            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.lastActiveDay forKey:@"lastActiveDay"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
+            
+            [self.managedObjectContext save:&error];
+            if (! error) {
+                NSLog(@"StudentInfo saved");
+            }
+            else {
+                NSLog(@"ERROR: Error when saving StudentInfo; message: %@", error.description);
+            }
+        }
+        else {
+            NSLog(@"ERROR: Error when fetching StudentInfo; message: %@", error.description);
+        }
+    }];
 }
 
 - (void)syncStudentLearnedWord
 {
-    // Sync StudentLearnedWord
     BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];
-    [query_studentLearnedWord whereKey:@"username" equalTo:[[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"]];
-    [query_studentLearnedWord whereKey:@"date"
-                   greaterThanOrEqualTo:[[NSUserDefaults standardUserDefaults] objectForKey:@"lastSyncDate"]];
+    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
+    [query_studentLearnedWord whereKey:@"studentUsername" equalTo:studentUsername];
+    NSDate* lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentLearnedWord_lastSyncDate"];
+    NSLog(@"Last synced: %@", lastSyncDate);
+    if (lastSyncDate) {
+        [query_studentLearnedWord whereKey:@"date" greaterThanOrEqualTo:lastSyncDate];
+    }
     [query_studentLearnedWord setLimit:500];
     [query_studentLearnedWord findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
         if (! error) {
@@ -71,6 +128,9 @@
             [self.managedObjectContext save:&error];
             if (! error) {
                 NSLog(@"StudentLearnedWord saved");
+                
+                [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedWord_lastSyncDate"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
             }
             else {
                 NSLog(@"ERROR: Error when saving StudentLearnedWord; message: %@", error.description);

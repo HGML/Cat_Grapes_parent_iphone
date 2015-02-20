@@ -6,10 +6,13 @@
 //  Copyright (c) 2015年 Yi Li. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "HomeViewController.h"
 
 #import "SWRevealViewController.h"
 #import "ImageTextCell.h"
+
+#import "StudentLearnedWord.h"
 
 
 @interface HomeViewController () <UITableViewDataSource>
@@ -31,6 +34,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *coinCountLabel;
 
 @property (weak, nonatomic) IBOutlet UITableView *newsFeedTableView;
+
+
+
+@property (nonatomic, strong) NSManagedObjectContext* context;
 
 @end
 
@@ -60,6 +67,18 @@
     }
     
     
+    // Sign up for Bmob sync update notification
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(studentInfoUpdated:)
+                                                 name:@"StudentInfoUpdated"
+                                               object:nil];
+    
+    
+    // Get Managed Object Context
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    
+    
     // Check if logged in
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isLoggedIn"];   // TEST PURPOSE
 //    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"username"];   // TEST PURPOSE
@@ -68,6 +87,23 @@
     }
     
     
+    // Update display
+    [self updateDisplay];
+}
+
+
+#pragma mark - StudentInfo Updated
+
+- (void)studentInfoUpdated:(NSNotification*)notification
+{
+    [self updateDisplay];
+}
+
+
+#pragma mark - Update Display
+
+- (void)updateDisplay
+{
     // Update progress bar
     [self updateProgressBar];
     
@@ -83,21 +119,14 @@
     [self updateNewsFeedTable];
 }
 
-//- (void)showLogIn
-//{
-//    [self performSegueWithIdentifier:@"showLogIn" sender:self];
-//}
-
-
-#pragma mark - Setup
-
 - (void)updateProgressBar
 {
     float screenWidth = self.view.frame.size.width;
     
-    int currentCount = 27;   // number of days active (not consecutive)
-    int nextGoal = 30;
-    int previousGoal = 20;
+    int currentCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"totalActiveDays"] intValue];   // number of days active (not consecutive)
+    
+    int nextGoal = 365;
+    int previousGoal = 300;
     
     [self.progressBarFilled setText:[NSString stringWithFormat:@"%d天", currentCount]];
     [self.progressBarEmpty setText:[NSString stringWithFormat:@"%d天", nextGoal]];
@@ -110,7 +139,7 @@
 
 - (void)updateConsecutiveLabel
 {
-    int consecutiveDays = 24;
+    int consecutiveDays = [[[NSUserDefaults standardUserDefaults] objectForKey:@"consecutiveActiveDays"] intValue];
     NSMutableAttributedString* message = [self.consecutiveLabel.attributedText mutableCopy];
     UIFont* font = [UIFont systemFontOfSize:60.0];
     NSAttributedString* numberString = [[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%d", consecutiveDays]
@@ -121,7 +150,14 @@
 
 - (void)updateWordCountLabel
 {
-    int wordCount = 267;
+    NSError* error = nil;
+    NSFetchRequest* request_learnedWord = [NSFetchRequest fetchRequestWithEntityName:@"StudentLearnedWord"];
+    request_learnedWord.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    request_learnedWord.propertiesToFetch = [NSArray arrayWithObject:@"allWordsCount"];
+    NSArray* match_learnedWord = [self.context executeFetchRequest:request_learnedWord error:&error];
+    StudentLearnedWord* slw = [match_learnedWord lastObject];
+    
+    int wordCount = slw.allWordsCount.intValue;
     [self.wordCountLabel setText:[NSString stringWithFormat:@"%d", wordCount]];
 }
 
