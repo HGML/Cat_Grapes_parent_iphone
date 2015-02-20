@@ -112,6 +112,14 @@ typedef enum{week = 0, month, year} CountPeriod;
         [dailyNew addObject:obj.dailyNewWordsCount];
     }
     
+    // Fill daily new and total words to 365 days
+    while (dailyTotal.count < 365) {
+        [dailyTotal insertObject:[NSNumber numberWithInt:-1] atIndex:0];
+    }
+    while (dailyNew.count < 365) {
+        [dailyNew insertObject:[NSNumber numberWithInt:-1] atIndex:0];
+    }
+    
     // Calculate daily and total words for the past week and the past month
     self.weekAllWords = [dailyTotal subarrayWithRange:NSMakeRange(dailyTotal.count-7, 7)];
     self.weekDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-7, 7)];
@@ -119,8 +127,8 @@ typedef enum{week = 0, month, year} CountPeriod;
     self.monthDailyWords = [dailyNew subarrayWithRange:NSMakeRange(dailyNew.count-30, 30)];
     
     // Calculate weekly total words for every week in the past year
-    NSMutableArray* weeklyTotalWords = [NSMutableArray array];
-    for (size_t index = dailyTotal.count - 7 * 52; index < dailyTotal.count; index += 7) {
+    NSMutableArray* weeklyTotalWords = [NSMutableArray arrayWithCapacity:52];
+    for (size_t index = dailyTotal.count >=364 ? dailyTotal.count - 7 * 52 : 0; index < dailyTotal.count; index += 7) {
         [weeklyTotalWords addObject:[dailyTotal objectAtIndex:index]];
     }
     self.yearAllWords = weeklyTotalWords;
@@ -129,10 +137,20 @@ typedef enum{week = 0, month, year} CountPeriod;
     NSMutableArray* weeklyNewWords = [NSMutableArray array];
     for (size_t index = dailyNew.count - 7 * 52; index < dailyNew.count; index += 7) {
         size_t sum = 0;
+        BOOL valid = NO;
         for (size_t day = 0; day < 7; ++day) {
-            sum += [[dailyNew objectAtIndex:index + day] integerValue];
+            NSInteger added = [[dailyNew objectAtIndex:index + day] integerValue];
+            if (added >= 0) {
+                sum += added;
+                valid = YES;
+            }
         }
-        [weeklyNewWords addObject:[NSNumber numberWithInteger:sum]];
+        if (! valid) {
+            [weeklyNewWords addObject:[NSNumber numberWithInteger:-1]];
+        }
+        else {
+            [weeklyNewWords addObject:[NSNumber numberWithInteger:sum]];
+        }
     }
     self.yearWeeklyWords = weeklyNewWords;
     
@@ -202,6 +220,13 @@ typedef enum{week = 0, month, year} CountPeriod;
             
         default:
             break;
+    }
+    
+    // Remove -1
+    if ([self.currentData containsObject:[NSNumber numberWithInteger:-1]]) {
+        NSMutableArray* mutableCurrentData = [self.currentData mutableCopy];
+        [mutableCurrentData removeObject:[NSNumber numberWithInteger:-1]];
+        self.currentData = [mutableCurrentData copy];
     }
     
     // Reload graph
