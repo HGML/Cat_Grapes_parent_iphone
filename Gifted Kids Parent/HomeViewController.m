@@ -125,8 +125,8 @@
     
     int currentCount = [[[NSUserDefaults standardUserDefaults] objectForKey:@"totalActiveDays"] intValue];   // number of days active (not consecutive)
     
-    int nextGoal = 365;
-    int previousGoal = 300;
+    int nextGoal = 3;
+    int previousGoal = 0;
     
     [self.progressBarFilled setText:[NSString stringWithFormat:@"%d天", currentCount]];
     [self.progressBarEmpty setText:[NSString stringWithFormat:@"%d天", nextGoal]];

@@ -24,7 +24,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Set Bmob App Key
     [Bmob registerWithAppKey:@"fa90d174e686f8e6cffeabeff62de5b6"];   // Application ID for Gifted Kids
     
     // Sync with Bmob database
@@ -56,7 +56,7 @@
 {
     BmobQuery* query_studentInfo = [BmobQuery queryWithClassName:@"StudentInfo"];
     NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
-    [query_studentInfo whereKey:@"username" equalTo:studentUsername];
+    [query_studentInfo whereKey:@"studentUsername" equalTo:studentUsername];
     [query_studentInfo findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
         if (! error) {
             if (! match.count) {
