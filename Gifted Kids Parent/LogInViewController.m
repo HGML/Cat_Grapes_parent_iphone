@@ -14,6 +14,10 @@
 #import "ParentUser.h"
 
 
+#define TABLEVIEW_HEIGHT_SMALL 88
+
+#define TABLEVIEW_HEIGHT_LARGE 132
+
 typedef enum{logIn = 0, signUp} State;
 
 @interface LogInViewController () <UITableViewDataSource, UITextFieldDelegate>
@@ -22,8 +26,10 @@ typedef enum{logIn = 0, signUp} State;
 
 @property (nonatomic) State state;
 
-
 @property (weak, nonatomic) IBOutlet UITableView *userInfoTableView;
+
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *userInfoTableViewHeightConstraint;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
@@ -43,6 +49,7 @@ typedef enum{logIn = 0, signUp} State;
     [self.navigationController setNavigationBarHidden:YES];
     
     // Set up user info table view
+    self.userInfoTableViewHeightConstraint.constant = TABLEVIEW_HEIGHT_SMALL;
     self.userInfoTableView.dataSource = self;
     
     // Set up submit (log in or sign up) button
@@ -71,12 +78,20 @@ typedef enum{logIn = 0, signUp} State;
             self.state = signUp;
             [self.submitButton setTitle:@"注册" forState:UIControlStateNormal];
             [self.logInSignUpToggleButton setTitle:@"登录" forState:UIControlStateNormal];
+            
+            self.userInfoTableViewHeightConstraint.constant = TABLEVIEW_HEIGHT_LARGE;
+            [self.userInfoTableView reloadData];
+            
             break;
             
         case signUp:
             self.state = logIn;
             [self.submitButton setTitle:@"登录" forState:UIControlStateNormal];
             [self.logInSignUpToggleButton setTitle:@"注册" forState:UIControlStateNormal];
+            
+            self.userInfoTableViewHeightConstraint.constant = TABLEVIEW_HEIGHT_SMALL;
+            [self.userInfoTableView reloadData];
+            
             break;
             
         default:
@@ -88,8 +103,19 @@ typedef enum{logIn = 0, signUp} State;
 #pragma mark - Table View Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
-}
+    switch (self.state) {
+        case logIn:
+            return 2;
+            break;
+            
+        case signUp:
+            return 3;
+            break;
+            
+        default:   // log in
+            return 2;
+            break;
+    }}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     FormFieldCell *cell = (FormFieldCell*)[tableView dequeueReusableCellWithIdentifier:@"formFieldCell" forIndexPath:indexPath];
@@ -101,7 +127,7 @@ typedef enum{logIn = 0, signUp} State;
              forControlEvents:UIControlEventEditingChanged];
     
     switch (indexPath.row) {
-        case 0:
+        case 0:   // username
             [cell.textField setPlaceholder:@"用户名"];
             [cell.textField setTag:0];
             [cell.textField setKeyboardType:UIKeyboardTypeEmailAddress];
@@ -110,12 +136,30 @@ typedef enum{logIn = 0, signUp} State;
             [cell.textField setText:@"sysamli"];   // TEST PURPOSE
             break;
             
-        case 1:
+        case 1:   // password
             [cell.textField setPlaceholder:@"密码"];
             [cell.textField setTag:1];
             [cell.textField setSecureTextEntry:YES];
-            [cell.textField setReturnKeyType:UIReturnKeyGo];
+            switch (self.state) {
+                case logIn:
+                    [cell.textField setReturnKeyType:UIReturnKeyGo];
+                    break;
+                    
+                case signUp:
+                    [cell.textField setReturnKeyType:UIReturnKeyNext];
+                    
+                default:
+                    break;
+            }
             [cell.textField setText:@"951117"];   // TEST PURPOSE
+            break;
+            
+        case 2:   // student username
+            [cell.textField setPlaceholder:@"学生用户名"];
+            [cell.textField setTag:2];
+            [cell.textField setReturnKeyType:UIReturnKeyGo];
+            [cell.textField setText:@"HGMLee"];   // TEST PURPOSE
+            break;
             
         default:
             break;
@@ -171,9 +215,17 @@ typedef enum{logIn = 0, signUp} State;
     FormFieldCell* usernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:0 inSection:0]];
     NSString* username = usernameCell.textField.text;
+    
     FormFieldCell* passwordCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:1 inSection:0]];
     NSString* password = passwordCell.textField.text;
+    
+    NSString* studentUsername = nil;
+    if (self.state == signUp) {
+        FormFieldCell* studentUsernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
+                                                              [NSIndexPath indexPathForRow:2 inSection:0]];
+        studentUsername = studentUsernameCell.textField.text;
+    }
     
     // Perform log in or sign up
     switch (self.state) {
@@ -182,7 +234,7 @@ typedef enum{logIn = 0, signUp} State;
             break;
             
         case signUp:
-            [self signUpWithUsername:username andPassword:password];
+            [self signUpWithUsername:username password:password andStudentUsername:studentUsername];
             break;
             
         default:
@@ -216,12 +268,12 @@ typedef enum{logIn = 0, signUp} State;
     }];
 }
 
-- (void)signUpWithUsername:(NSString*)username andPassword:(NSString*)password
+- (void)signUpWithUsername:(NSString*)username password:(NSString*)password andStudentUsername:(NSString*)studentUsername
 {
     ParentUser *parent = [[ParentUser alloc] init];
     [parent setUserName:username];
     [parent setPassword:password];
-    [parent setStudentUsername:@"HGMLee"];   // TEST; should ask for user input
+    [parent setStudentUsername:studentUsername];   // TEST; should ask for user input
     [parent signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
         if (isSuccessful) {
             NSLog(@"Signed up for parent user %@ and password %@: id %@", username, password, parent.objectId);
