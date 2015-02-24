@@ -13,6 +13,7 @@
 #import "ImageTextCell.h"
 
 #import "StudentLearnedWord.h"
+#import "StudentLearnedComponent.h"
 
 
 @interface HomeViewController () <UITableViewDataSource>
@@ -163,7 +164,14 @@
 
 - (void)updateStructureCountLabel
 {
-    int structureCount = 32;
+    NSError* error = nil;
+    NSFetchRequest* request_learnedComponent = [NSFetchRequest fetchRequestWithEntityName:@"StudentLearnedComponent"];
+    request_learnedComponent.sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES]];
+    request_learnedComponent.propertiesToFetch = [NSArray arrayWithObject:@"allComponentsCount"];
+    NSArray* match_learnedComponent = [self.context executeFetchRequest:request_learnedComponent error:&error];
+    StudentLearnedComponent* slc = [match_learnedComponent lastObject];
+    
+    int structureCount = slc.allComponentsCount.intValue;
     [self.structureCountLabel setText:[NSString stringWithFormat:@"%d", structureCount]];
 }
 

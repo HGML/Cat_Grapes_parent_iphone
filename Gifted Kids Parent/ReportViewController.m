@@ -128,7 +128,7 @@ typedef enum{week = 0, month, year} CountPeriod;
     
     // Calculate weekly total words for every week in the past year
     NSMutableArray* weeklyTotalWords = [NSMutableArray arrayWithCapacity:52];
-    for (size_t index = dailyTotal.count >=364 ? dailyTotal.count - 7 * 52 : 0; index < dailyTotal.count; index += 7) {
+    for (size_t index = dailyTotal.count - 7 * 52 + 6; index < dailyTotal.count; index += 7) {
         [weeklyTotalWords addObject:[dailyTotal objectAtIndex:index]];
     }
     self.yearAllWords = weeklyTotalWords;
@@ -156,8 +156,9 @@ typedef enum{week = 0, month, year} CountPeriod;
     
     
     // Load Graph
-    self.currentData = self.weekDailyWords;
-    [self.wordLineGraph reloadGraph];
+    [self reloadData];
+//    self.currentData = self.weekDailyWords;
+//    [self.wordLineGraph reloadGraph];
 }
 
 

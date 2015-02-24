@@ -13,6 +13,7 @@
 
 #import "StudentInfo+Add.h"
 #import "StudentLearnedWord+Add.h"
+#import "StudentLearnedComponent+Add.h"
 
 
 @interface AppDelegate ()
@@ -48,8 +49,9 @@
 
 - (void)syncWithBmob
 {
-    [self syncStudentLearnedWord];
     [self syncStudentInfo];
+    [self syncStudentLearnedWord];
+    [self syncStudentLearnedComponent];
 }
 
 - (void)syncStudentInfo
@@ -131,6 +133,8 @@
                 
                 [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedWord_lastSyncDate"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
             }
             else {
                 NSLog(@"ERROR: Error when saving StudentLearnedWord; message: %@", error.description);
@@ -138,6 +142,56 @@
         }
         else {
             NSLog(@"ERROR: Error when fetching StudentLearnedWord; message: %@", error.description);
+        }
+    }];
+}
+
+- (void)syncStudentLearnedComponent
+{
+    BmobQuery* query_studentLearnedComponent = [BmobQuery queryWithClassName:@"StudentLearnedComponent"];
+    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
+    [query_studentLearnedComponent whereKey:@"studentUsername" equalTo:studentUsername];
+    NSDate* lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentLearnedComponent_lastSyncDate"];
+    NSLog(@"Last synced: %@", lastSyncDate);
+    if (lastSyncDate) {
+        [query_studentLearnedComponent whereKey:@"date" greaterThanOrEqualTo:lastSyncDate];
+    }
+    [query_studentLearnedComponent setLimit:500];
+    [query_studentLearnedComponent findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
+        if (! error) {
+            if (! match.count) {
+                NSLog(@"No new StudentLearnedComponent to be fetched");
+                return;
+            }
+            
+            NSLog(@"SUCCESS: Fetched %ld new StudentLearnedComponent", match.count);
+            
+            for (BmobObject* obj in match) {
+                [StudentLearnedComponent studentLearnedComponentForStudent:[obj objectForKey:@"studentUsername"]
+                                                                    onDate:[obj objectForKey:@"date"]
+                                                         withNewComponents:[obj objectForKey:@"dailyNewComponents"]
+                                                        newComponentsCount:[obj objectForKey:@"dailyNewComponentsCount"]
+                                                          andAllComponents:[obj objectForKey:@"allComponents"]
+                                                        allComponentsCount:[obj objectForKey:@"allComponentsCount"]
+                                                    inManagedObjectContext:self.managedObjectContext];
+            }
+            
+            
+            [self.managedObjectContext save:&error];
+            if (! error) {
+                NSLog(@"StudentLearnedComponent saved");
+                
+                [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedComponent_lastSyncDate"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
+            }
+            else {
+                NSLog(@"ERROR: Error when saving StudentLearnedComponent; message: %@", error.description);
+            }
+        }
+        else {
+            NSLog(@"ERROR: Error when fetching StudentLearnedComponent; message: %@", error.description);
         }
     }];
 }
