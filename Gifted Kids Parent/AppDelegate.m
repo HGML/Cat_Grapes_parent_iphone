@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <BmobSDK/Bmob.h>
 
 #import "DateManager.h"
 
@@ -25,14 +24,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Set Bmob App Key
-    [Bmob registerWithAppKey:@"fa90d174e686f8e6cffeabeff62de5b6"];   // Application ID for Gifted Kids
-    
-    // Sync with Bmob database
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"isLoggedIn"]) {
-        [self syncWithBmob];
-    }
-    
     // Sign up for User Logged In notification
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(isLoggedIn:)
@@ -44,157 +35,157 @@
 
 - (void)isLoggedIn:(NSNotification*)notification
 {
-    [self syncWithBmob];
+//    [self syncWithBmob];
 }
 
-- (void)syncWithBmob
-{
-    [self syncStudentInfo];
-    [self syncStudentLearnedWord];
-    [self syncStudentLearnedComponent];
-}
+//- (void)syncWithBmob
+//{
+//    [self syncStudentInfo];
+//    [self syncStudentLearnedWord];
+//    [self syncStudentLearnedComponent];
+//}
 
-- (void)syncStudentInfo
-{
-    BmobQuery* query_studentInfo = [BmobQuery queryWithClassName:@"StudentInfo"];
-    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
-    [query_studentInfo whereKey:@"studentUsername" equalTo:studentUsername];
-    [query_studentInfo findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
-        if (! error) {
-            if (! match.count) {
-                NSLog(@"ERROR: Can't find StudentInfo with student username %@", studentUsername);
-                return;
-            }
-            
-            NSLog(@"SUCCESS: Fetched StudentInfo");
-            
-            BmobObject* info = [match lastObject];
-            StudentInfo* studentInfo = [StudentInfo studentInfoForStudent:studentUsername
-                                                      withTotalActiveDays:[info objectForKey:@"totalActiveDays"]
-                                                    consecutiveActiveDays:[info objectForKey:@"consecutiveActiveDays"]
-                                                         andLastActiveDay:[info objectForKey:@"lastActiveDay"]
-                                                   inManagedObjectContext:self.managedObjectContext];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.totalActiveDays forKey:@"totalActiveDays"];
-            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.consecutiveActiveDays forKey:@"consecutiveActiveDays"];
-            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.lastActiveDay forKey:@"lastActiveDay"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
-            
-            [self.managedObjectContext save:&error];
-            if (! error) {
-                NSLog(@"StudentInfo saved");
-            }
-            else {
-                NSLog(@"ERROR: Error when saving StudentInfo; message: %@", error.description);
-            }
-        }
-        else {
-            NSLog(@"ERROR: Error when fetching StudentInfo; message: %@", error.description);
-        }
-    }];
-}
+//- (void)syncStudentInfo
+//{
+//    BmobQuery* query_studentInfo = [BmobQuery queryWithClassName:@"StudentInfo"];
+//    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
+//    [query_studentInfo whereKey:@"studentUsername" equalTo:studentUsername];
+//    [query_studentInfo findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
+//        if (! error) {
+//            if (! match.count) {
+//                NSLog(@"ERROR: Can't find StudentInfo with student username %@", studentUsername);
+//                return;
+//            }
+//            
+//            NSLog(@"SUCCESS: Fetched StudentInfo");
+//            
+//            BmobObject* info = [match lastObject];
+//            StudentInfo* studentInfo = [StudentInfo studentInfoForStudent:studentUsername
+//                                                      withTotalActiveDays:[info objectForKey:@"totalActiveDays"]
+//                                                    consecutiveActiveDays:[info objectForKey:@"consecutiveActiveDays"]
+//                                                         andLastActiveDay:[info objectForKey:@"lastActiveDay"]
+//                                                   inManagedObjectContext:self.managedObjectContext];
+//            
+//            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.totalActiveDays forKey:@"totalActiveDays"];
+//            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.consecutiveActiveDays forKey:@"consecutiveActiveDays"];
+//            [[NSUserDefaults standardUserDefaults] setObject:studentInfo.lastActiveDay forKey:@"lastActiveDay"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
+//            
+//            [self.managedObjectContext save:&error];
+//            if (! error) {
+//                NSLog(@"StudentInfo saved");
+//            }
+//            else {
+//                NSLog(@"ERROR: Error when saving StudentInfo; message: %@", error.description);
+//            }
+//        }
+//        else {
+//            NSLog(@"ERROR: Error when fetching StudentInfo; message: %@", error.description);
+//        }
+//    }];
+//}
 
-- (void)syncStudentLearnedWord
-{
-    BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];
-    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
-    [query_studentLearnedWord whereKey:@"studentUsername" equalTo:studentUsername];
-    NSDate* lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentLearnedWord_lastSyncDate"];
-    NSLog(@"Last synced: %@", lastSyncDate);
-    if (lastSyncDate) {
-        [query_studentLearnedWord whereKey:@"date" greaterThanOrEqualTo:lastSyncDate];
-    }
-    [query_studentLearnedWord setLimit:500];
-    [query_studentLearnedWord findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
-        if (! error) {
-            if (! match.count) {
-                NSLog(@"No new StudentLearnedWord to be fetched");
-                return;
-            }
-            
-            NSLog(@"SUCCESS: Fetched %ld new StudentLearnedWord", match.count);
-            
-            for (BmobObject* obj in match) {
-                [StudentLearnedWord studentLearnedWordForStudent:[obj objectForKey:@"studentUsername"]
-                                                          onDate:[obj objectForKey:@"date"]
-                                                    withNewWords:[obj objectForKey:@"dailyNewWords"]
-                                                   newWordsCount:[obj objectForKey:@"dailyNewWordsCount"]
-                                                     andAllWords:[obj objectForKey:@"allWords"]
-                                                   allWordsCount:[obj objectForKey:@"allWordsCount"]
-                                          inManagedObjectContext:self.managedObjectContext];
-            }
-            
-            
-            [self.managedObjectContext save:&error];
-            if (! error) {
-                NSLog(@"StudentLearnedWord saved");
-                
-                [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedWord_lastSyncDate"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
-            }
-            else {
-                NSLog(@"ERROR: Error when saving StudentLearnedWord; message: %@", error.description);
-            }
-        }
-        else {
-            NSLog(@"ERROR: Error when fetching StudentLearnedWord; message: %@", error.description);
-        }
-    }];
-}
+//- (void)syncStudentLearnedWord
+//{
+//    BmobQuery* query_studentLearnedWord = [BmobQuery queryWithClassName:@"StudentLearnedWord"];
+//    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
+//    [query_studentLearnedWord whereKey:@"studentUsername" equalTo:studentUsername];
+//    NSDate* lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentLearnedWord_lastSyncDate"];
+//    NSLog(@"Last synced: %@", lastSyncDate);
+//    if (lastSyncDate) {
+//        [query_studentLearnedWord whereKey:@"date" greaterThanOrEqualTo:lastSyncDate];
+//    }
+//    [query_studentLearnedWord setLimit:500];
+//    [query_studentLearnedWord findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
+//        if (! error) {
+//            if (! match.count) {
+//                NSLog(@"No new StudentLearnedWord to be fetched");
+//                return;
+//            }
+//            
+//            NSLog(@"SUCCESS: Fetched %ld new StudentLearnedWord", match.count);
+//            
+//            for (BmobObject* obj in match) {
+//                [StudentLearnedWord studentLearnedWordForStudent:[obj objectForKey:@"studentUsername"]
+//                                                          onDate:[obj objectForKey:@"date"]
+//                                                    withNewWords:[obj objectForKey:@"dailyNewWords"]
+//                                                   newWordsCount:[obj objectForKey:@"dailyNewWordsCount"]
+//                                                     andAllWords:[obj objectForKey:@"allWords"]
+//                                                   allWordsCount:[obj objectForKey:@"allWordsCount"]
+//                                          inManagedObjectContext:self.managedObjectContext];
+//            }
+//            
+//            
+//            [self.managedObjectContext save:&error];
+//            if (! error) {
+//                NSLog(@"StudentLearnedWord saved");
+//                
+//                [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedWord_lastSyncDate"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
+//            }
+//            else {
+//                NSLog(@"ERROR: Error when saving StudentLearnedWord; message: %@", error.description);
+//            }
+//        }
+//        else {
+//            NSLog(@"ERROR: Error when fetching StudentLearnedWord; message: %@", error.description);
+//        }
+//    }];
+//}
 
-- (void)syncStudentLearnedComponent
-{
-    BmobQuery* query_studentLearnedComponent = [BmobQuery queryWithClassName:@"StudentLearnedComponent"];
-    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
-    [query_studentLearnedComponent whereKey:@"studentUsername" equalTo:studentUsername];
-    NSDate* lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentLearnedComponent_lastSyncDate"];
-    NSLog(@"Last synced: %@", lastSyncDate);
-    if (lastSyncDate) {
-        [query_studentLearnedComponent whereKey:@"date" greaterThanOrEqualTo:lastSyncDate];
-    }
-    [query_studentLearnedComponent setLimit:500];
-    [query_studentLearnedComponent findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
-        if (! error) {
-            if (! match.count) {
-                NSLog(@"No new StudentLearnedComponent to be fetched");
-                return;
-            }
-            
-            NSLog(@"SUCCESS: Fetched %ld new StudentLearnedComponent", match.count);
-            
-            for (BmobObject* obj in match) {
-                [StudentLearnedComponent studentLearnedComponentForStudent:[obj objectForKey:@"studentUsername"]
-                                                                    onDate:[obj objectForKey:@"date"]
-                                                         withNewComponents:[obj objectForKey:@"dailyNewComponents"]
-                                                        newComponentsCount:[obj objectForKey:@"dailyNewComponentsCount"]
-                                                          andAllComponents:[obj objectForKey:@"allComponents"]
-                                                        allComponentsCount:[obj objectForKey:@"allComponentsCount"]
-                                                    inManagedObjectContext:self.managedObjectContext];
-            }
-            
-            
-            [self.managedObjectContext save:&error];
-            if (! error) {
-                NSLog(@"StudentLearnedComponent saved");
-                
-                [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedComponent_lastSyncDate"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
-            }
-            else {
-                NSLog(@"ERROR: Error when saving StudentLearnedComponent; message: %@", error.description);
-            }
-        }
-        else {
-            NSLog(@"ERROR: Error when fetching StudentLearnedComponent; message: %@", error.description);
-        }
-    }];
-}
+//- (void)syncStudentLearnedComponent
+//{
+//    BmobQuery* query_studentLearnedComponent = [BmobQuery queryWithClassName:@"StudentLearnedComponent"];
+//    NSString* studentUsername = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentUsername"];
+//    [query_studentLearnedComponent whereKey:@"studentUsername" equalTo:studentUsername];
+//    NSDate* lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"studentLearnedComponent_lastSyncDate"];
+//    NSLog(@"Last synced: %@", lastSyncDate);
+//    if (lastSyncDate) {
+//        [query_studentLearnedComponent whereKey:@"date" greaterThanOrEqualTo:lastSyncDate];
+//    }
+//    [query_studentLearnedComponent setLimit:500];
+//    [query_studentLearnedComponent findObjectsInBackgroundWithBlock:^(NSArray* match, NSError* error) {
+//        if (! error) {
+//            if (! match.count) {
+//                NSLog(@"No new StudentLearnedComponent to be fetched");
+//                return;
+//            }
+//            
+//            NSLog(@"SUCCESS: Fetched %ld new StudentLearnedComponent", match.count);
+//            
+//            for (BmobObject* obj in match) {
+//                [StudentLearnedComponent studentLearnedComponentForStudent:[obj objectForKey:@"studentUsername"]
+//                                                                    onDate:[obj objectForKey:@"date"]
+//                                                         withNewComponents:[obj objectForKey:@"dailyNewComponents"]
+//                                                        newComponentsCount:[obj objectForKey:@"dailyNewComponentsCount"]
+//                                                          andAllComponents:[obj objectForKey:@"allComponents"]
+//                                                        allComponentsCount:[obj objectForKey:@"allComponentsCount"]
+//                                                    inManagedObjectContext:self.managedObjectContext];
+//            }
+//            
+//            
+//            [self.managedObjectContext save:&error];
+//            if (! error) {
+//                NSLog(@"StudentLearnedComponent saved");
+//                
+//                [[NSUserDefaults standardUserDefaults] setObject:[DateManager today] forKey:@"studentLearnedComponent_lastSyncDate"];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//                
+//                [[NSNotificationCenter defaultCenter] postNotificationName:@"StudentInfoUpdated" object:self];
+//            }
+//            else {
+//                NSLog(@"ERROR: Error when saving StudentLearnedComponent; message: %@", error.description);
+//            }
+//        }
+//        else {
+//            NSLog(@"ERROR: Error when fetching StudentLearnedComponent; message: %@", error.description);
+//        }
+//    }];
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

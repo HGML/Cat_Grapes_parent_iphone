@@ -53,12 +53,7 @@
                                                                       style:UIBarButtonItemStyleBordered
                                                                      target:self.revealViewController
                                                                      action:@selector(revealToggle:)];
-//    UIBarButtonItem* rightButton = [[UIBarButtonItem alloc] initWithTitle:@"登录"
-//                                                                    style:UIBarButtonItemStyleBordered
-//                                                                   target:self
-//                                                                   action:@selector(showLogIn)];
     [self.navigationItem setLeftBarButtonItem:sidebarButton];
-//    [self.navigationItem setRightBarButtonItem:rightButton];
     
     
     // Set up SWRevealController

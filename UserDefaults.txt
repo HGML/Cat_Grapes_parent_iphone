@@ -1,0 +1,12 @@
+UserDefaults
+
+username
+isLoggedIn
+userID (Bmob User objectID)
+studentUsername
+
+studentLearnedWord_lastSyncDate
+
+totalActiveDays
+consecutiveActiveDays
+lastActiveDay

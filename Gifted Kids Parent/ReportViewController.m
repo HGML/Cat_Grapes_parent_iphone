@@ -16,6 +16,8 @@
 #import "StudentLearnedWord.h"
 
 
+typedef enum{word = 0, structure} DataType;
+
 typedef enum{added = 0, total} CountType;
 
 typedef enum{week = 0, month, year} CountPeriod;
@@ -25,9 +27,14 @@ typedef enum{week = 0, month, year} CountPeriod;
 
 @property (weak, nonatomic) IBOutlet BEMSimpleLineGraphView *wordLineGraph;
 
+@property (weak, nonatomic) IBOutlet UISegmentedControl *dataTypeSegmentedControl;
+
 @property (weak, nonatomic) IBOutlet UISegmentedControl *countTypeSegmentedControl;
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *countPeriodSegmentedControl;
+
+
+@property (nonatomic) DataType dataType;
 
 @property (nonatomic) CountType type;
 
@@ -78,6 +85,9 @@ typedef enum{week = 0, month, year} CountPeriod;
     [self configureGraph];
     
     // Set up segmented control
+    [self.dataTypeSegmentedControl addTarget:self
+                                      action:@selector(dataTypeChanged:)
+                            forControlEvents:UIControlEventValueChanged];
     [self.countTypeSegmentedControl addTarget:self
                                        action:@selector(countTypeChanged:)
                              forControlEvents:UIControlEventValueChanged];
@@ -113,6 +123,14 @@ typedef enum{week = 0, month, year} CountPeriod;
     }
     
     // Fill daily new and total words to 365 days
+    if (dailyTotal.count < 365) {
+        int dayOneTotal = [[dailyTotal firstObject] intValue];
+        int dayOneNew = [[dailyNew firstObject] intValue];
+        [dailyTotal insertObject:[NSNumber numberWithInt:dayOneTotal - dayOneNew] atIndex:0];
+    }
+    if (dailyNew.count < 365) {
+        [dailyNew insertObject:[NSNumber numberWithInt:5] atIndex:0];   // TEST: should be replaced by average daily new words of all users
+    }
     while (dailyTotal.count < 365) {
         [dailyTotal insertObject:[NSNumber numberWithInt:-1] atIndex:0];
     }
@@ -163,6 +181,12 @@ typedef enum{week = 0, month, year} CountPeriod;
 
 
 #pragma mark - Segmented Control
+
+- (void)dataTypeChanged:(UISegmentedControl*)control
+{
+    self.dataType = (int)control.selectedSegmentIndex;
+    [self reloadData];
+}
 
 - (void)countTypeChanged:(UISegmentedControl*)control
 {
@@ -287,10 +311,10 @@ typedef enum{week = 0, month, year} CountPeriod;
 
 - (NSString *)lineGraph:(BEMSimpleLineGraphView *)graph labelOnXAxisForIndex:(NSInteger)index {
     if (self.period == year) {
-        return [NSString stringWithFormat:@"Wk\n%ld", index + 1];
+        return [NSString stringWithFormat:@"Wk %ld", index + 1];
     }
     else {
-        return [NSString stringWithFormat:@"Day\n%ld", index + 1];
+        return [NSString stringWithFormat:@"Day %ld", index + 1];
     }
 }
 

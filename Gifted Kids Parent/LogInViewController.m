@@ -10,7 +10,6 @@
 #import "FormFieldCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-//#import <BmobSDK/Bmob.h>
 #import "ParentUser.h"
 
 
@@ -244,57 +243,57 @@ typedef enum{logIn = 0, signUp} State;
 
 - (void)logInWithUsername:(NSString*)username andPassword:(NSString*)password
 {
-    [ParentUser loginWithUsernameInBackground:username password:password block:^(BmobUser* user, NSError* error){
-        if (! error) {
-            NSLog(@"Logged in for parent user %@ password %@", username, password);
-            
-            ParentUser* parent = (ParentUser*)user;
-            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
-            [[NSUserDefaults standardUserDefaults] setObject:parent.objectId forKey:@"userID"];
-//            [[NSUserDefaults standardUserDefaults] setObject:parent.studentUsername forKey:@"studentUsername"];
-            [[NSUserDefaults standardUserDefaults] setObject:@"HGMLee" forKey:@"studentUsername"];   // TEST
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            // Post User Logged In notification
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
-            
-            // Return to Home
-            [self showHome];
-        }
-        else {
-            NSLog(@"ERROR: Can't log in for username %@ and password %@\n%@", username, password, error.description);
-        }
-    }];
+//    [ParentUser loginWithUsernameInBackground:username password:password block:^(BmobUser* user, NSError* error){
+//        if (! error) {
+//            NSLog(@"Logged in for parent user %@ password %@", username, password);
+//            
+//            ParentUser* parent = (ParentUser*)user;
+//            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+//            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+//            [[NSUserDefaults standardUserDefaults] setObject:parent.objectId forKey:@"userID"];
+////            [[NSUserDefaults standardUserDefaults] setObject:parent.studentUsername forKey:@"studentUsername"];
+//            [[NSUserDefaults standardUserDefaults] setObject:@"HGMLee" forKey:@"studentUsername"];   // TEST
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            
+//            // Post User Logged In notification
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
+//            
+//            // Return to Home
+//            [self showHome];
+//        }
+//        else {
+//            NSLog(@"ERROR: Can't log in for username %@ and password %@\n%@", username, password, error.description);
+//        }
+//    }];
 }
 
 - (void)signUpWithUsername:(NSString*)username password:(NSString*)password andStudentUsername:(NSString*)studentUsername
 {
-    ParentUser *parent = [[ParentUser alloc] init];
-    [parent setUserName:username];
-    [parent setPassword:password];
-    [parent setStudentUsername:studentUsername];   // TEST; should ask for user input
-    [parent signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
-        if (isSuccessful) {
-            NSLog(@"Signed up for parent user %@ and password %@: id %@", username, password, parent.objectId);
-            NSLog(@"Student: %@", parent.studentUsername);
-            
-            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
-            [[NSUserDefaults standardUserDefaults] setObject:parent.objectId forKey:@"userID"];
-            [[NSUserDefaults standardUserDefaults] setObject:parent.studentUsername forKey:@"studentUsername"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            // Post User Logged In notification
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
-            
-            // Return to Home
-            [self showHome];
-        }
-        else {
-            NSLog(@"ERROR: Can't sign up for username %@ and password %@\n%@", username, password, error.description);
-        }
-    }];
+//    ParentUser *parent = [[ParentUser alloc] init];
+//    [parent setUserName:username];
+//    [parent setPassword:password];
+//    [parent setStudentUsername:studentUsername];   // TEST; should ask for user input
+//    [parent signUpInBackgroundWithBlock:^ (BOOL isSuccessful, NSError *error){
+//        if (isSuccessful) {
+//            NSLog(@"Signed up for parent user %@ and password %@: id %@", username, password, parent.objectId);
+//            NSLog(@"Student: %@", parent.studentUsername);
+//            
+//            [[NSUserDefaults standardUserDefaults] setObject:username forKey:@"username"];
+//            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isLoggedIn"];
+//            [[NSUserDefaults standardUserDefaults] setObject:parent.objectId forKey:@"userID"];
+//            [[NSUserDefaults standardUserDefaults] setObject:parent.studentUsername forKey:@"studentUsername"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            
+//            // Post User Logged In notification
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
+//            
+//            // Return to Home
+//            [self showHome];
+//        }
+//        else {
+//            NSLog(@"ERROR: Can't sign up for username %@ and password %@\n%@", username, password, error.description);
+//        }
+//    }];
 }
 
 
