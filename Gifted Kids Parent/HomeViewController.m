@@ -63,7 +63,7 @@
     }
     
     
-    // Sign up for Bmob sync update notification
+    // Sign up for server sync update notification
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(studentInfoUpdated:)
                                                  name:@"StudentInfoUpdated"
@@ -81,10 +81,10 @@
     if (! [[[NSUserDefaults standardUserDefaults] objectForKey:@"isLoggedIn"] boolValue]) {
         [self performSegueWithIdentifier:@"showLogIn" sender:self];
     }
-    
-    
-    // Update display
-    [self updateDisplay];
+    else {
+        // Update display
+        [self updateDisplay];
+    }
 }
 
 
