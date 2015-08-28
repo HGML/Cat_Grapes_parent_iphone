@@ -32,11 +32,11 @@ typedef enum{logIn = 0, signUp} State;
 
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 
-@property (nonatomic) BOOL hasUsername;
+@property (nonatomic) BOOL hasEmailOrPhone;
 
 @property (nonatomic) BOOL hasPassword;
 
-@property (nonatomic, strong) NSString* username;
+@property (nonatomic, strong) NSString* emailOrPhone;
 
 @end
 
@@ -128,17 +128,20 @@ typedef enum{logIn = 0, signUp} State;
              forControlEvents:UIControlEventEditingChanged];
     
     switch (indexPath.row) {
-        case 0:   // username
-            [cell.textField setPlaceholder:@"用户名"];
+        case 0:   // email OR phone
+            [cell.textField setPlaceholder:@"手机号 或 邮箱"];
             [cell.textField setTag:0];
             [cell.textField setKeyboardType:UIKeyboardTypeEmailAddress];
             [cell.textField setReturnKeyType:UIReturnKeyNext];
-            [cell.textField setText:self.username];
+            [cell.textField setText:self.emailOrPhone];
             if (! cell.textField.text.length) {
-                [cell.textField setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"username"]];
+                [cell.textField setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"ParentPhone"]];
             }
             if (! cell.textField.text.length) {
-                [cell.textField setText:@"sysamli"];   // TEST PURPOSE
+                [cell.textField setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"ParentEmail"]];
+            }
+            if (! cell.textField.text.length) {
+                [cell.textField setText:@"01234567890"];   // TEST PURPOSE
             }
             break;
             
@@ -157,14 +160,14 @@ typedef enum{logIn = 0, signUp} State;
                 default:
                     break;
             }
-            [cell.textField setText:@"951117"];   // TEST PURPOSE
+            [cell.textField setText:@"user1"];   // TEST PURPOSE
             break;
             
-        case 2:   // student username
-            [cell.textField setPlaceholder:@"学生用户名"];
+        case 2:   // username
+            [cell.textField setPlaceholder:@"用户名（选填）"];
             [cell.textField setTag:2];
+            [cell.textField setKeyboardType:UIKeyboardTypeDefault];
             [cell.textField setReturnKeyType:UIReturnKeyGo];
-            [cell.textField setText:@"HGMLee"];   // TEST PURPOSE
             break;
             
         default:
@@ -181,7 +184,7 @@ typedef enum{logIn = 0, signUp} State;
 {
     switch (textField.tag) {
         case 0:
-            self.hasUsername = textField.text.length;
+            self.hasEmailOrPhone = textField.text.length;
             break;
             
         case 1:
@@ -192,7 +195,7 @@ typedef enum{logIn = 0, signUp} State;
             break;
     }
     
-    [self.submitButton setEnabled:(self.hasUsername && self.hasPassword)];
+    [self.submitButton setEnabled:(self.hasEmailOrPhone && self.hasPassword)];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -217,30 +220,38 @@ typedef enum{logIn = 0, signUp} State;
 
 - (IBAction)submitPressed:(id)sender
 {
-    // Get username and password
-    FormFieldCell* usernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
-                                                   [NSIndexPath indexPathForRow:0 inSection:0]];
-    NSString* username = usernameCell.textField.text;
+    // Get email/phone and password
+    FormFieldCell* emailPhoneCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
+                                                     [NSIndexPath indexPathForRow:0 inSection:0]];
+    NSString* emailOrPhone = emailPhoneCell.textField.text;
     
     FormFieldCell* passwordCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
                                                    [NSIndexPath indexPathForRow:1 inSection:0]];
     NSString* password = passwordCell.textField.text;
     
-    NSString* studentUsername = nil;
+    NSString* username = nil;
     if (self.state == signUp) {
-        FormFieldCell* studentUsernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
-                                                              [NSIndexPath indexPathForRow:2 inSection:0]];
-        studentUsername = studentUsernameCell.textField.text;
+        FormFieldCell* usernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
+                                                       [NSIndexPath indexPathForRow:2 inSection:0]];
+        username = usernameCell.textField.text;
     }
+
+    
+//    NSString* studentUsername = nil;
+//    if (self.state == signUp) {
+//        FormFieldCell* studentUsernameCell = (FormFieldCell*)[self.userInfoTableView cellForRowAtIndexPath:
+//                                                              [NSIndexPath indexPathForRow:2 inSection:0]];
+//        studentUsername = studentUsernameCell.textField.text;
+//    }
     
     // Perform log in or sign up
     switch (self.state) {
         case logIn:
-            [self logInWithUsername:username andPassword:password];
+            [self logInWithEmailOrPhone:emailOrPhone andPassword:password];
             break;
             
         case signUp:
-            [self signUpWithUsername:username password:password andStudentUsername:studentUsername];
+            [self signUpWithEmailOrPhone:emailOrPhone password:password andUsername:username];
             break;
             
         default:
@@ -248,16 +259,31 @@ typedef enum{logIn = 0, signUp} State;
     }
 }
 
-- (void)logInWithUsername:(NSString*)username andPassword:(NSString*)password
+- (BOOL)isAllDigits:(NSString*)string
+{
+    NSCharacterSet* nonNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    NSRange range = [string rangeOfCharacterFromSet:nonNumbers];
+    return range.location == NSNotFound;
+}
+
+- (void)logInWithEmailOrPhone:(NSString*)emailOrPhone andPassword:(NSString*)password
 {
     NSLog(@"Logging in...");
     
-    NSMutableArray* parentInfo = [NSMutableArray arrayWithObjects:username, password, nil];
+    NSMutableArray* parentInfo = [NSMutableArray arrayWithObjects:emailOrPhone, password, nil];
     
-    // Package all the paras in a student field
-    NSDictionary *parameters = @{@"parent":@{@"name":parentInfo[0],
-                                             @"password":parentInfo[1]}
-                                 };
+    // Package all the paras in a parent field
+    NSDictionary *parameters;
+    if ([self isAllDigits:emailOrPhone]) {   // phone
+        parameters = @{@"parent":@{@"phone":parentInfo[0],
+                                   @"password":parentInfo[1]}
+                       };
+    }
+    else {   // email
+        parameters = @{@"parent":@{@"email":parentInfo[0],
+                                   @"password":parentInfo[1]}
+                       };
+    }
     
     // Send a GET request to back-end server to log in student user
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -268,7 +294,7 @@ typedef enum{logIn = 0, signUp} State;
         {
             NSLog(@"Server: No parent account exists with username %@ and password %@.", parentInfo[0], parentInfo[1]);
             UIAlertView* noAccountAlert = [[UIAlertView alloc] initWithTitle:@"无法登陆"
-                                                                     message:@"邮箱或密码错误"
+                                                                     message:@"电话，邮箱或密码错误"
                                                                     delegate:self
                                                            cancelButtonTitle:@"好"
                                                            otherButtonTitles:nil];
@@ -281,7 +307,12 @@ typedef enum{logIn = 0, signUp} State;
             
             // Save parent username to UserDefaults
             NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-            [userDefaults setObject:username forKey:@"ParentUsername"];
+            if ([self isAllDigits:emailOrPhone]) {   // phone
+                [userDefaults setObject:emailOrPhone forKey:@"ParentPhone"];
+            }
+            else {
+                [userDefaults setObject:emailOrPhone forKey:@"ParentEmail"];
+            }
             [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"ServerLoggedIn"];
             [[NSUserDefaults standardUserDefaults] setObject:@"HGMLee" forKey:@"studentUsername"];   // TEST
             [userDefaults synchronize];
@@ -297,22 +328,79 @@ typedef enum{logIn = 0, signUp} State;
     }];
 }
 
-- (void)signUpWithUsername:(NSString*)username password:(NSString*)password andStudentUsername:(NSString*)studentUsername
+//- (void)logInWithUsername:(NSString*)username andPassword:(NSString*)password
+//{
+//    NSLog(@"Logging in...");
+//    
+//    NSMutableArray* parentInfo = [NSMutableArray arrayWithObjects:username, password, nil];
+//    
+//    // Package all the paras in a student field
+//    NSDictionary *parameters = @{@"parent":@{@"name":parentInfo[0],
+//                                             @"password":parentInfo[1]}
+//                                 };
+//    
+//    // Send a GET request to back-end server to log in student user
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager GET:@LOGIN_URL parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//        NSLog(@"Server response object: %@", responseObject);
+//        
+//        if([responseObject[@"status"]  isEqual: (@"Login Failure")])
+//        {
+//            NSLog(@"Server: No parent account exists with username %@ and password %@.", parentInfo[0], parentInfo[1]);
+//            UIAlertView* noAccountAlert = [[UIAlertView alloc] initWithTitle:@"无法登陆"
+//                                                                     message:@"邮箱或密码错误"
+//                                                                    delegate:self
+//                                                           cancelButtonTitle:@"好"
+//                                                           otherButtonTitles:nil];
+//            [noAccountAlert show];
+//            return;
+//        }
+//        else if([responseObject[@"status"]  isEqual: (@"Login Success")])
+//        {
+//            NSLog(@"Server: Logged in successfully!");
+//            
+//            // Save parent username to UserDefaults
+//            NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+//            [userDefaults setObject:username forKey:@"ParentUsername"];
+//            [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"ServerLoggedIn"];
+//            [[NSUserDefaults standardUserDefaults] setObject:@"HGMLee" forKey:@"studentUsername"];   // TEST
+//            [userDefaults synchronize];
+//            
+//            // Post User Logged In notification
+//            [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
+//            
+//            // Return to Home
+//            [self showHome];
+//        }
+//    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"Error: %@", error);
+//    }];
+//}
+
+- (void)signUpWithEmailOrPhone:(NSString*)emailOrPhone password:(NSString*)password andUsername:(NSString*)username
 {
-    NSLog(@"Creating new student account...");
+    NSLog(@"Creating new parent account...");
     
     /*
-     * Username
-     * Mobile phone
+     * Email or Phone
      * Password
+     * Username (optional)
      */
-    NSMutableArray* parentInfo = [NSMutableArray arrayWithObjects:username, @"01234567890", password, nil];
+    NSMutableArray* parentInfo = [NSMutableArray arrayWithObjects:emailOrPhone, password, username, nil];
     
-    // Package all the paras in a student field
-    NSDictionary *parameters = @{@"parent":@{@"name":parentInfo[0],
-                                             @"mobile_phone":parentInfo[1],
-                                             @"password":parentInfo[2]}
-                                 };
+    // Package all the paras in a parent field
+    NSDictionary *parameters;
+    if ([self isAllDigits:emailOrPhone]) {   // phone
+        parameters = @{@"parent":@{@"phone":parentInfo[0],
+                                   @"password":parentInfo[1],
+                                   @"username":parentInfo[2]}
+                       };
+    }
+    else {   // email
+        parameters = @{@"parent":@{@"email":parentInfo[0],
+                                   @"password":parentInfo[1],
+                                   @"username":parentInfo[2]}
+                       };
     
     // Send a POST request to back-end server to create the student user.
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -322,10 +410,10 @@ typedef enum{logIn = 0, signUp} State;
               NSLog(@"Server response object: %@", responseObject);
               
               if([responseObject[@"status"]  isEqual: (@"Existed")]) {
-                  NSLog(@"Server: An account already exists under the email address %@. Please log in instead.", parentInfo[0]);
+                  NSLog(@"Server: An account already exists under %@. Please log in instead.", parentInfo[0]);
                   NSLog(@"Parent not created");
-                  self.username = parentInfo[0];
-                  UIAlertView* usernameExistsAlert = [[UIAlertView alloc] initWithTitle:@"用户名已被使用"
+                  self.emailOrPhone = parentInfo[0];
+                  UIAlertView* usernameExistsAlert = [[UIAlertView alloc] initWithTitle:@"改账号已被注册"
                                                                                 message:@"是否要登陆？"
                                                                                delegate:self
                                                                       cancelButtonTitle:@"取消"
@@ -345,7 +433,12 @@ typedef enum{logIn = 0, signUp} State;
                   
                   // Save parent username to UserDefaults
                   NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
-                  [userDefaults setObject:username forKey:@"ParentUsername"];
+                  if ([self isAllDigits:emailOrPhone]) {   // phone
+                      [userDefaults setObject:emailOrPhone forKey:@"ParentPhone"];
+                  }
+                  else {
+                      [userDefaults setObject:emailOrPhone forKey:@"ParentEmail"];
+                  }
                   [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"ServerLoggedIn"];
                   [userDefaults synchronize];
                   
@@ -363,7 +456,76 @@ typedef enum{logIn = 0, signUp} State;
           } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               NSLog(@"Server: ERROR when performing POST operation: %@", error);
           }];
+    }
 }
+
+//- (void)signUpWithUsername:(NSString*)username password:(NSString*)password andStudentUsername:(NSString*)studentUsername
+//{
+//    NSLog(@"Creating new student account...");
+//    
+//    /*
+//     * Username
+//     * Mobile phone
+//     * Password
+//     */
+//    NSMutableArray* parentInfo = [NSMutableArray arrayWithObjects:username, @"01234567890", password, nil];
+//    
+//    // Package all the paras in a student field
+//    NSDictionary *parameters = @{@"parent":@{@"name":parentInfo[0],
+//                                             @"mobile_phone":parentInfo[1],
+//                                             @"password":parentInfo[2]}
+//                                 };
+//    
+//    // Send a POST request to back-end server to create the student user.
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager POST:@CREATE_PARENT_URL
+//       parameters:parameters
+//          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+//              NSLog(@"Server response object: %@", responseObject);
+//              
+//              if([responseObject[@"status"]  isEqual: (@"Existed")]) {
+//                  NSLog(@"Server: An account already exists under the email address %@. Please log in instead.", parentInfo[0]);
+//                  NSLog(@"Parent not created");
+//                  self.username = parentInfo[0];
+//                  UIAlertView* usernameExistsAlert = [[UIAlertView alloc] initWithTitle:@"用户名已被使用"
+//                                                                                message:@"是否要登陆？"
+//                                                                               delegate:self
+//                                                                      cancelButtonTitle:@"取消"
+//                                                                      otherButtonTitles:@"登陆", nil];
+//                  [usernameExistsAlert show];
+//                  return;
+//              }
+//              else if([responseObject[@"status"]  isEqual: (@"Failure")]) {
+//                  NSLog(@"Server: Unknown Failure of signing up!");
+//                  // !!! Add future re_direction to the user page here.
+//              }
+//              else if([responseObject[@"status"]  isEqual: (@"Created")]) {
+//                  NSLog(@"Server: Created successfully!");
+//                  
+//                  id parentObject = responseObject[@"parent"];
+//                  NSLog(@"Signed up for parent user %@ and password %@: id %@", username, password, parentObject[@"id"]);
+//                  
+//                  // Save parent username to UserDefaults
+//                  NSUserDefaults* userDefaults = [NSUserDefaults standardUserDefaults];
+//                  [userDefaults setObject:username forKey:@"ParentUsername"];
+//                  [userDefaults setObject:[NSNumber numberWithBool:YES] forKey:@"ServerLoggedIn"];
+//                  [userDefaults synchronize];
+//                  
+//                  // Post User Logged In notification
+//                  NSLog(@"Local: Logged In");
+//                  [[NSNotificationCenter defaultCenter] postNotificationName:@"UserLoggedIn" object:self];
+//                  
+//                  // Create Parent locally
+//                  
+//                  // Ask parent to add student
+//                  
+//                  // Return to Home
+//                  [self showHome];
+//              }
+//          } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+//              NSLog(@"Server: ERROR when performing POST operation: %@", error);
+//          }];
+//}
 
 
 #pragma mark - Get Student IDs for parent
